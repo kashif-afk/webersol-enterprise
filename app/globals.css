@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-obsidian: #0B0F17;
+  --color-slateGraphite: #1E293B;
+  --color-electricBlue: #2563EB;
+  --color-cyanAccent: #06B6D4;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-obsidian);
+    color: #F8FAFC;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Scrollbar for Enterprise Feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-obsidian);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-slateGraphite);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-electricBlue);
+}
