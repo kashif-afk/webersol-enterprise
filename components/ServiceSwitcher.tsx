@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cpu, Code2, TrendingUp, CheckCircle2, ArrowUpRight } from 'lucide-react';
@@ -84,10 +85,13 @@ export const ServiceSwitcher = () => {
                 <h4 className="text-2xl sm:text-3xl font-bold">{selectedService.title}</h4>
                 <p className="text-slate-400 leading-relaxed">{selectedService.description}</p>
                 <div className="pt-2">
-                  <a href="#contact" className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold text-sm group">
-                    Request Architectural Blueprint
+                  <Link 
+                    href={`/services/${selectedService.id}`} 
+                    className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold text-sm group"
+                  >
+                    Explore {selectedService.title} Architecture
                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </a>
+                  </Link>
                 </div>
               </div>
 
