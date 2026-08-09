@@ -14,10 +14,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className="bg-[var(--color-obsidian)] text-white antialiased flex flex-col min-h-screen">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <body 
+        suppressHydrationWarning 
+        className="bg-[var(--color-obsidian)] text-white antialiased flex flex-col min-h-screen relative"
+      >
+       
         <Header />
-        <main className="flex-grow">
+        <main className="grow">
           {children}
         </main>
         <Footer />
