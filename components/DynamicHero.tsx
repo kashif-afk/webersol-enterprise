@@ -19,7 +19,7 @@ export const DynamicHero = () => {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-slateGraphite)]/80 border border-slate-700/60 backdrop-blur-md text-xs font-mono text-cyan-400"
         >
           <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
-          <span>Next-Gen Enterprise Automation & AI Systems</span>
+          <span>Architecting Autonomous AI & Enterprise Web Infrastructure.</span>
         </motion.div>
 
         <motion.h1
@@ -38,7 +38,7 @@ export const DynamicHero = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-3xl mx-auto text-slate-400 text-lg sm:text-xl font-normal leading-relaxed"
         >
-          Webersol engineers high-throughput software architectures, agentic workflow automation, and growth platforms designed to scale modern enterprises.
+          Webersol engineers high-performance software architectures, agentic workflow automation, and scalable digital platforms designed to accelerate and scale modern enterprises.
         </motion.p>
 
         <motion.div
