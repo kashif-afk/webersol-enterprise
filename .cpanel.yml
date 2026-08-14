@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/webrsoln/public_html/
+    - export DEPLOYPATH=/home/webrsoln/public_html/webersol.com/
     - /bin/cp -R out/* $DEPLOYPATH
