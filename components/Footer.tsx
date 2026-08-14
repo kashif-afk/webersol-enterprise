@@ -10,7 +10,7 @@ export const Footer = () => {
     <footer className="bg-[var(--color-obsidian)] border-t border-slate-800 text-slate-400 text-sm">
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
         
-        {/* Brand Info & Socials */}
+        {/* Brand Info */}
         <div className="lg:col-span-2 space-y-4">
           <div className="relative h-14 w-52">
             <Image
@@ -29,8 +29,54 @@ export const Footer = () => {
             <ShieldCheck className="w-4 h-4 text-cyan-400" />
             <span>SOC2 Type II Compliant Architecture</span>
           </div>
+        </div>
 
-          {/* Social Links with Inline SVGs */}
+        {/* Capabilities */}
+        <div className="space-y-3">
+          <h4 className="text-white font-semibold text-xs font-mono uppercase tracking-wider">Capabilities</h4>
+          <ul className="space-y-2.5 text-sm">
+            <li><Link href="/services/ai-automation" className="hover:text-cyan-400 transition-colors">Generative AI Agents</Link></li>
+            <li><Link href="/services/custom-engineering" className="hover:text-cyan-400 transition-colors">Cloud Architecture</Link></li>
+            <li><Link href="/services/financial-erp" className="hover:text-cyan-400 transition-colors">Financial ERP Systems</Link></li>
+            <li><Link href="/services/performance-growth" className="hover:text-cyan-400 transition-colors">Generative Engine SEO</Link></li>
+          </ul>
+        </div>
+
+        {/* Platform */}
+        <div className="space-y-3">
+          <h4 className="text-white font-semibold text-xs font-mono uppercase tracking-wider">Platform</h4>
+          <ul className="space-y-2.5 text-sm">
+            <li><Link href="/#estimator" className="hover:text-cyan-400 transition-colors">ROI Estimator</Link></li>
+            <li><Link href="/#case-studies" className="hover:text-cyan-400 transition-colors">Case Studies</Link></li>
+            <li><Link href="/#contact" className="hover:text-cyan-400 transition-colors">Strategy Call</Link></li>
+          </ul>
+        </div>
+
+        {/* Contact & Social Links */}
+        <div className="space-y-6">
+          <div className="space-y-3">
+            <h4 className="text-white font-semibold text-xs font-mono uppercase tracking-wider">Contact</h4>
+            <ul className="space-y-2.5 text-xs font-mono">
+              <li className="flex items-start gap-2">
+                <MapPin className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+                <span>Waterbury, Connecticut, USA</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <MapPin className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+                <span>Johar Town, Lahore, Pakistan</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Mail className="w-4 h-4 text-cyan-400 shrink-0" />
+                <span>info@webersol.com</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-blue-400 shrink-0" />
+                <span>+92 335 4654941</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Social Links Moved to Right Side */}
           <div className="flex items-center gap-3 pt-2">
             {/* LinkedIn */}
             <a
@@ -71,50 +117,6 @@ export const Footer = () => {
               </svg>
             </a>
           </div>
-        </div>
-
-        {/* Capabilities */}
-        <div className="space-y-3">
-          <h4 className="text-white font-semibold text-xs font-mono uppercase tracking-wider">Capabilities</h4>
-          <ul className="space-y-2.5 text-sm">
-            <li><Link href="/services/ai-automation" className="hover:text-cyan-400 transition-colors">Generative AI Agents</Link></li>
-            <li><Link href="/services/custom-engineering" className="hover:text-cyan-400 transition-colors">Cloud Architecture</Link></li>
-            <li><Link href="/services/financial-erp" className="hover:text-cyan-400 transition-colors">Financial ERP Systems</Link></li>
-            <li><Link href="/services/performance-growth" className="hover:text-cyan-400 transition-colors">Generative Engine SEO</Link></li>
-          </ul>
-        </div>
-
-        {/* Platform */}
-        <div className="space-y-3">
-          <h4 className="text-white font-semibold text-xs font-mono uppercase tracking-wider">Platform</h4>
-          <ul className="space-y-2.5 text-sm">
-            <li><Link href="/#estimator" className="hover:text-cyan-400 transition-colors">ROI Estimator</Link></li>
-            <li><Link href="/#case-studies" className="hover:text-cyan-400 transition-colors">Case Studies</Link></li>
-            <li><Link href="/#contact" className="hover:text-cyan-400 transition-colors">Strategy Call</Link></li>
-          </ul>
-        </div>
-
-        {/* Contact */}
-        <div className="space-y-3">
-          <h4 className="text-white font-semibold text-xs font-mono uppercase tracking-wider">Contact</h4>
-          <ul className="space-y-2.5 text-xs font-mono">
-            <li className="flex items-start gap-2">
-              <MapPin className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-              <span>Waterbury, Connecticut, USA</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <MapPin className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-              <span>Johar Town, Lahore, Pakistan</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <Mail className="w-4 h-4 text-cyan-400 shrink-0" />
-              <span>info@webersol.com</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-blue-400 shrink-0" />
-              <span>+92 335 4654941</span>
-            </li>
-          </ul>
         </div>
 
       </div>
