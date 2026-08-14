@@ -8,10 +8,17 @@
 }
 
 @layer base {
-  body {
+  html, body {
     background-color: var(--color-obsidian);
+    /* Global AI Constellation & Neural Mesh Texture */
+    background-image: 
+      radial-gradient(circle at 50% 10%, rgba(37, 99, 235, 0.15) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.22' stroke-width='1'%3E%3Cpath d='M50 50 L150 30 L220 120 L90 180 Z' /%3E%3Cpath d='M150 30 L320 80 L280 200 L220 120 Z' /%3E%3Cpath d='M320 80 L380 150 L350 280 L280 200 Z' /%3E%3Cpath d='M90 180 L220 120 L180 290 L50 250 Z' /%3E%3Cpath d='M220 120 L280 200 L310 320 L180 290 Z' /%3E%3Cpath d='M280 200 L350 280 L380 380 L310 320 Z' /%3E%3Ccircle cx='50' cy='50' r='3' fill='%23ffffff' fill-opacity='0.4'/%3E%3Ccircle cx='150' cy='30' r='3' fill='%23ffffff' fill-opacity='0.4'/%3E%3Ccircle cx='220' cy='120' r='3.5' fill='%23ffffff' fill-opacity='0.5'/%3E%3Ccircle cx='320' cy='80' r='3' fill='%23ffffff' fill-opacity='0.4'/%3E%3Ccircle cx='90' cy='180' r='3' fill='%23ffffff' fill-opacity='0.4'/%3E%3Ccircle cx='280' cy='200' r='3.5' fill='%23ffffff' fill-opacity='0.5'/%3E%3Ccircle cx='350' cy='280' r='3' fill='%23ffffff' fill-opacity='0.4'/%3E%3Ccircle cx='180' cy='290' r='3' fill='%23ffffff' fill-opacity='0.4'/%3E%3Ccircle cx='310' cy='320' r='3' fill='%23ffffff' fill-opacity='0.4'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-attachment: fixed;
     color: #F8FAFC;
     overflow-x: hidden;
+    min-height: 100vh;
   }
 }
 

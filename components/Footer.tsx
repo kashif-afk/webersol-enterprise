@@ -37,6 +37,7 @@ export const Footer = () => {
           <ul className="space-y-2.5 text-sm">
             <li><Link href="/services/ai-automation" className="hover:text-cyan-400 transition-colors">Generative AI Agents</Link></li>
             <li><Link href="/services/custom-engineering" className="hover:text-cyan-400 transition-colors">Cloud Architecture</Link></li>
+            <li><Link href="/services/financial-erp" className="hover:text-cyan-400 transition-colors">Financial ERP Systems</Link></li>
             <li><Link href="/services/performance-growth" className="hover:text-cyan-400 transition-colors">Generative Engine SEO</Link></li>
           </ul>
         </div>
@@ -56,6 +57,11 @@ export const Footer = () => {
           <h4 className="text-white font-semibold text-xs font-mono uppercase tracking-wider">Contact</h4>
           <ul className="space-y-2.5 text-xs font-mono">
             <li className="flex items-start gap-2">
+              <MapPin className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+              <span>Waterbury, Connecticut, USA</span><br />
+          
+            </li>
+              <li className="flex items-start gap-2">
               <MapPin className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
               <span>Johar Town, Lahore, Pakistan</span>
             </li>

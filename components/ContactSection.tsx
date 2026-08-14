@@ -7,6 +7,7 @@ export const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     service: 'Generative AI & Agentic Automation',
     message: '',
   });
@@ -54,11 +55,11 @@ export const ContactSection = () => {
         setFormData({
           name: '',
           email: '',
+          phone: '',
           service: 'Generative AI & Agentic Automation',
           message: '',
         });
       } else {
-        // Display the specific error returned from the backend API
         throw new Error(data.error || 'Failed to submit form.');
       }
     } catch (error: any) {
@@ -71,7 +72,7 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-[var(--color-obsidian)] text-white px-6 lg:px-12 border-t border-slate-800/60">
+    <section id="contact" className="py-24 bg-[var(--color-obsidian)]/80 backdrop-blur-sm text-white px-6 lg:px-12 border-t border-slate-800/60">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
         {/* Direct Contact Info */}
@@ -105,14 +106,14 @@ export const ContactSection = () => {
               <MapPin className="w-5 h-5 text-indigo-400 shrink-0" />
               <div>
                 <p className="text-xs text-slate-400">Headquarters</p>
-                <p className="text-white font-bold">Johar Town, Lahore, Pakistan</p>
+                <p className="text-white font-bold">Waterbury, Connecticut, USA</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Lead Form */}
-        <div className="lg:col-span-7 bg-[var(--color-slateGraphite)]/30 border border-slate-800 p-8 rounded-2xl space-y-6">
+        <div className="lg:col-span-7 bg-[var(--color-slateGraphite)]/25 backdrop-blur-md border border-slate-800 p-8 rounded-2xl space-y-6">
           <h4 className="text-xl font-bold">Request Architecture Consultation</h4>
           
           <form className="space-y-4" onSubmit={handleSubmit}>
@@ -143,18 +144,32 @@ export const ContactSection = () => {
               </div>
             </div>
 
-            <div>
-              <label className="block text-xs font-mono text-slate-400 mb-1.5">Primary Focus Area</label>
-              <select
-                name="service"
-                value={formData.service}
-                onChange={handleChange}
-                className="w-full bg-[var(--color-obsidian)] border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500"
-              >
-                <option value="Generative AI & Agentic Automation">Generative AI & Agentic Automation</option>
-                <option value="Full-Stack Custom Web Architecture">Full-Stack Custom Web Architecture</option>
-                <option value="GEO & Performance Growth Marketing">GEO & Performance Growth Marketing</option>
-              </select>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-mono text-slate-400 mb-1.5">Primary Focus Area</label>
+                <select
+                  name="service"
+                  value={formData.service}
+                  onChange={handleChange}
+                  className="w-full bg-[var(--color-obsidian)] border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500"
+                >
+                  <option value="Generative AI & Agentic Automation">Generative AI & Agentic Automation</option>
+                  <option value="Full-Stack Custom Web Architecture">Full-Stack Custom Web Architecture</option>
+                  <option value="Financial ERP-Level Architecture">Financial ERP-Level Architecture</option>
+                  <option value="GEO & Performance Growth Marketing">GEO & Performance Growth Marketing</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-mono text-slate-400 mb-1.5">Phone Number (Optional)</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="+1 (555) 123-4567"
+                  className="w-full bg-[var(--color-obsidian)] border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500"
+                />
+              </div>
             </div>
 
             <div>

@@ -7,6 +7,7 @@ import {
   Cpu,
   Code2,
   TrendingUp,
+  Landmark,
   CheckCircle2,
   ArrowUpRight,
   Sparkles,
@@ -67,6 +68,24 @@ const services = [
     metric: '3.4x',
     metricLabel: 'Organic Traffic Uplift',
   },
+  {
+    id: 'financial-erp',
+    title: 'Financial ERP-Level Architecture & Core Systems',
+    shortTitle: 'Financial ERP',
+    icon: Landmark,
+    tagline: 'Mission-critical financial ledger systems and enterprise resource planning.',
+    description:
+      'We architect secure, multi-currency financial engines, automated general ledgers, and real-time compliance pipelines designed for enterprise transaction volumes.',
+    features: [
+      'Immutable Double-Entry General Ledger Engines',
+      'Multi-Currency & Real-Time Tax Computation',
+      'High-Throughput Reconciliation Pipelines',
+      'Strict Regulatory & Audit-Trail Compliance',
+    ],
+    stats: '99.999% Ledger Transaction Integrity',
+    metric: '100%',
+    metricLabel: 'Audit Transparency & Traceability',
+  },
 ];
 
 export const ServiceSwitcher = () => {
@@ -78,7 +97,7 @@ export const ServiceSwitcher = () => {
   const ActiveIcon = selectedService.icon;
 
   return (
-    <section className="relative py-24 sm:py-32 overflow-hidden">
+    <section id="services" className="relative py-24 sm:py-32 overflow-hidden">
       {/* Background ambient glow */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute left-1/2 top-20 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-600/10 blur-[120px]" />
@@ -86,11 +105,8 @@ export const ServiceSwitcher = () => {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-        {/* ================================================= */}
+        
         {/* SECTION HEADER */}
-        {/* ================================================= */}
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -111,16 +127,11 @@ export const ServiceSwitcher = () => {
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg">
-            From autonomous AI systems to high-scale cloud infrastructure and
-            AI-driven growth, we engineer technology that creates measurable
-            business impact.
+            From autonomous AI systems to robust financial ERP engines and global cloud infrastructure, we engineer technology that creates measurable business impact.
           </p>
         </motion.div>
 
-        {/* ================================================= */}
-        {/* SERVICE TABS */}
-        {/* ================================================= */}
-
+        {/* SERVICE TABS - Updated to support 4 columns */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -131,7 +142,7 @@ export const ServiceSwitcher = () => {
             mx-auto
             mb-6
             grid
-            max-w-5xl
+            max-w-6xl
             grid-cols-1
             gap-2
             rounded-2xl
@@ -140,7 +151,7 @@ export const ServiceSwitcher = () => {
             bg-[var(--color-slateGraphite)]/40
             p-2
             backdrop-blur-xl
-            md:grid-cols-3
+            md:grid-cols-4
           "
         >
           {services.map((service) => {
@@ -160,7 +171,7 @@ export const ServiceSwitcher = () => {
                   overflow-hidden
                   rounded-xl
                   border
-                  px-5
+                  px-4
                   py-4
                   text-left
                   transition-all
@@ -172,7 +183,6 @@ export const ServiceSwitcher = () => {
                   }
                 `}
               >
-                {/* Hover glow */}
                 <div
                   className="
                     pointer-events-none
@@ -186,7 +196,6 @@ export const ServiceSwitcher = () => {
                   "
                 />
 
-                {/* Active top glow */}
                 {isActive && (
                   <motion.div
                     layoutId="activeServiceGlow"
@@ -219,11 +228,10 @@ export const ServiceSwitcher = () => {
                   </div>
 
                   <div className="min-w-0">
-                    <p className="text-sm font-semibold">
+                    <p className="text-xs font-semibold truncate">
                       {service.shortTitle}
                     </p>
-
-                    <p className="mt-0.5 truncate text-[11px] text-slate-500 group-hover:text-slate-400">
+                    <p className="mt-0.5 truncate text-[10px] text-slate-500 group-hover:text-slate-400">
                       {service.tagline}
                     </p>
                   </div>
@@ -233,10 +241,7 @@ export const ServiceSwitcher = () => {
           })}
         </motion.div>
 
-        {/* ================================================= */}
         {/* MAIN SERVICE PANEL */}
-        {/* ================================================= */}
-
         <div
           className="
             group/panel
@@ -250,7 +255,6 @@ export const ServiceSwitcher = () => {
             shadow-black/20
           "
         >
-          {/* Panel hover glow */}
           <div
             className="
               pointer-events-none
@@ -274,7 +278,6 @@ export const ServiceSwitcher = () => {
               className="relative z-10 grid min-h-[440px] grid-cols-1 gap-10 p-7 sm:p-10 lg:grid-cols-[1.15fr_0.85fr] lg:p-14"
             >
               {/* LEFT CONTENT */}
-
               <div className="flex flex-col justify-center">
                 <div className="mb-6 flex items-center gap-4">
                   <motion.div
@@ -303,22 +306,17 @@ export const ServiceSwitcher = () => {
                     <p className="text-xs font-mono uppercase tracking-[0.2em] text-cyan-400">
                       {selectedService.shortTitle}
                     </p>
-
                     <p className="mt-1 text-xs text-slate-500">
                       Enterprise Technology Vertical
                     </p>
                   </div>
                 </div>
 
-                {/* Metric */}
-
                 <div className="mb-6 inline-flex w-fit items-center gap-3 rounded-xl border border-slate-800 bg-slate-950/50 px-4 py-3">
                   <span className="text-2xl font-bold font-mono text-white">
                     {selectedService.metric}
                   </span>
-
                   <span className="h-6 w-px bg-slate-700" />
-
                   <span className="text-xs font-medium text-slate-400">
                     {selectedService.metricLabel}
                   </span>
@@ -361,7 +359,6 @@ export const ServiceSwitcher = () => {
                     "
                   >
                     Explore Architecture
-
                     <ArrowUpRight
                       className="
                         h-4
@@ -377,7 +374,6 @@ export const ServiceSwitcher = () => {
               </div>
 
               {/* RIGHT CONTENT */}
-
               <div className="flex items-center">
                 <div
                   className="
@@ -392,8 +388,6 @@ export const ServiceSwitcher = () => {
                     sm:p-8
                   "
                 >
-                  {/* Card glow */}
-
                   <div
                     className="
                       pointer-events-none
@@ -414,7 +408,6 @@ export const ServiceSwitcher = () => {
                         <p className="text-xs font-mono uppercase tracking-[0.18em] text-slate-500">
                           Core Deliverables
                         </p>
-
                         <p className="mt-1 text-sm text-slate-300">
                           What we engineer
                         </p>
@@ -474,14 +467,11 @@ export const ServiceSwitcher = () => {
                       ))}
                     </div>
 
-                    {/* Bottom stat */}
-
                     <div className="mt-7 border-t border-slate-800 pt-6">
                       <div className="flex items-center justify-between">
                         <span className="text-xs text-slate-500">
                           Performance Benchmark
                         </span>
-
                         <span className="text-xs font-mono font-semibold text-cyan-400">
                           {selectedService.stats}
                         </span>
@@ -494,10 +484,7 @@ export const ServiceSwitcher = () => {
           </AnimatePresence>
         </div>
 
-        {/* ================================================= */}
         {/* BOTTOM TRUST STRIP */}
-        {/* ================================================= */}
-
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

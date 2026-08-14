@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { FloatingAIBot } from "@/components/FloatingAIBot";
 
 export const metadata: Metadata = {
   title: "Webersol | Enterprise AI & Software Engineering",
@@ -17,14 +18,16 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body 
         suppressHydrationWarning 
-        className="bg-[var(--color-obsidian)] text-white antialiased flex flex-col min-h-screen relative"
+        className="bg-transparent text-white antialiased flex flex-col min-h-screen relative"
       >
-       
         <Header />
         <main className="grow">
           {children}
         </main>
         <Footer />
+
+        {/* Persistent Floating AI Bot Assistant */}
+        <FloatingAIBot />
       </body>
     </html>
   );

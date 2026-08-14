@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { AnimatePresence, motion } from 'framer-motion'; // Import framer-motion
+import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X, Sparkles } from 'lucide-react';
 
 // Define animation variants for the header container
@@ -13,8 +13,8 @@ const headerVariants = {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.4, // Smooth 0.4 second animation
-      ease: 'easeOut' as const, // Use a supported easing value
+      duration: 0.4,
+      ease: 'easeOut' as const,
     },
   },
 };
@@ -38,29 +38,27 @@ export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    // Wrap the header in motion.header to apply animations
     <motion.header
       initial="hidden"
       animate="visible"
       variants={headerVariants}
-      className="sticky top-0 z-50 w-full backdrop-blur-xl bg-[var(--color-obsidian)]/80 border-b border-slate-800/80 transition-all"
+      className="relative z-50 w-full backdrop-blur-xl bg-[var(--color-obsidian)]/80 border-b border-slate-800/80 transition-all"
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         
        {/* Brand Logo */}
-<Link href="/" className="flex items-center gap-3 group">
-  <div className="relative h-19 w-52 sm:w-65 ">
-    <Image
-      src="/logo.png"
-      alt="Webersol Logo"
-      fill
-      className="object-contain object-left"
-      sizes="(max-width: 640px) 192px, 240px" // Add this line
-      priority
-    />
-  </div>
-</Link>
-    
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="relative h-19 w-52 sm:w-65 ">
+            <Image
+              src="/logo.png"
+              alt="Webersol Logo"
+              fill
+              className="object-contain object-left"
+              sizes="(max-width: 640px) 192px, 240px"
+              priority
+            />
+          </div>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">

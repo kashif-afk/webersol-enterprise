@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const caseStudies = [
   {
@@ -22,7 +22,6 @@ const caseStudies = [
     tags: ['Next.js', 'Python', 'Agentic AI', 'AWS Lambda'],
     cta: 'Explore Case Study',
   },
-
   {
     id: 2,
     client: 'FinTech Capital Portal',
@@ -41,7 +40,6 @@ const caseStudies = [
     tags: ['Next.js', 'TypeScript', 'Redis', 'AWS'],
     cta: 'Explore Case Study',
   },
-
   {
     id: 3,
     client: 'B2B Enterprise Health',
@@ -58,6 +56,42 @@ const caseStudies = [
       'Automated structured-data generation',
     ],
     tags: ['GEO', 'JSON-LD', 'Knowledge Graph', 'Programmatic SEO'],
+    cta: 'Explore Case Study',
+  },
+  {
+    id: 4,
+    client: 'Global Manufacturing & Supply Chain',
+    category: 'erp-saas',
+    categoryLabel: 'ERP SaaS',
+    metric: '3.5x',
+    metricLabel: 'Faster Synchronization',
+    title: 'Multi-Tenant ERP SaaS & Inventory Core',
+    description:
+      'Engineered a multi-tenant enterprise resource planning platform managing automated warehouse fulfillment, stock routing, and real-time ledger rollups across 14 international subsidiaries.',
+    impact: [
+      '3.5x faster data synchronization',
+      'Zero-latency subsidiary updates',
+      'Automated inventory forecasting',
+    ],
+    tags: ['Next.js', 'PostgreSQL', 'Redis', 'Docker'],
+    cta: 'Explore Case Study',
+  },
+  {
+    id: 5,
+    client: 'Enterprise FinTech Core',
+    category: 'financial-erp',
+    categoryLabel: 'Financial Systems',
+    metric: '100%',
+    metricLabel: 'Audit Transparency',
+    title: 'Immutable Double-Entry Financial Ledger & ERP Engine',
+    description:
+      'Architected a robust core accounting and multi-currency reconciliation engine capable of processing hundreds of thousands of ledger entries daily with strict mathematical certainty and zero data drift.',
+    impact: [
+      '100% audit trail transparency',
+      'Sub-millisecond multi-currency rates',
+      'Zero-discrepancy transactional integrity',
+    ],
+    tags: ['TypeScript', 'Node.js', 'PostgreSQL', 'AWS'],
     cta: 'Explore Case Study',
   },
 ];
@@ -78,6 +112,8 @@ export const CaseStudyShowcase = () => {
           <div className="flex flex-wrap gap-2 bg-[var(--color-slateGraphite)]/40 p-1.5 rounded-xl border border-slate-800">
             {[
               { id: 'all', label: 'All Projects' },
+              { id: 'erp-saas', label: 'ERP SaaS' },
+              { id: 'financial-erp', label: 'Financial' },
               { id: 'ai-automation', label: 'AI & Automation' },
               { id: 'custom-engineering', label: 'Engineering' },
               { id: 'performance-growth', label: 'Growth' },
@@ -86,7 +122,7 @@ export const CaseStudyShowcase = () => {
                 key={f.id}
                 onClick={() => setFilter(f.id)}
                 className={`px-4 py-2 rounded-lg text-xs font-mono transition-all ${
-                  filter === f.id ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'
+                  filter === f.id ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20' : 'text-slate-400 hover:text-white'
                 }`}
               >
                 {f.label}
@@ -95,42 +131,46 @@ export const CaseStudyShowcase = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {filteredStudies.map((study) => (
-            <motion.div
-              layout
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              key={study.id}
-              className="bg-[var(--color-slateGraphite)]/30 border border-slate-800 hover:border-slate-700 rounded-2xl p-6 flex flex-col justify-between group transition-all"
-            >
-              <div className="space-y-4">
-                <div className="flex justify-between items-start">
-                  <span className="text-xs font-mono text-slate-400">{study.client}</span>
-                  <span className="px-2.5 py-1 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-mono text-xs font-bold rounded-md">
-                    {study.metric}
-                  </span>
-                </div>
-                <h4 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
-                  {study.title}
-                </h4>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  {study.description}
-                </p>
-              </div>
-
-              <div className="pt-6 border-t border-slate-800/80 mt-6 space-y-4">
-                <div className="flex flex-wrap gap-1.5">
-                  {study.tags.map((tag, i) => (
-                    <span key={i} className="text-[10px] font-mono bg-[var(--color-obsidian)] text-slate-400 px-2 py-1 rounded border border-slate-800">
-                      {tag}
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <AnimatePresence>
+            {filteredStudies.map((study) => (
+              <motion.div
+                layout
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                key={study.id}
+                className="bg-[var(--color-slateGraphite)]/30 border border-slate-800 hover:border-slate-700 rounded-2xl p-6 flex flex-col justify-between group transition-all"
+              >
+                <div className="space-y-4">
+                  <div className="flex justify-between items-start">
+                    <span className="text-xs font-mono text-slate-400">{study.client}</span>
+                    <span className="px-2.5 py-1 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-mono text-xs font-bold rounded-md">
+                      {study.metric}
                     </span>
-                  ))}
+                  </div>
+                  <h4 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                    {study.title}
+                  </h4>
+                  <p className="text-slate-400 text-sm leading-relaxed">
+                    {study.description}
+                  </p>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+
+                <div className="pt-6 border-t border-slate-800/80 mt-6 space-y-4">
+                  <div className="flex flex-wrap gap-1.5">
+                    {study.tags.map((tag, i) => (
+                      <span key={i} className="text-[10px] font-mono bg-[var(--color-obsidian)] text-slate-400 px-2 py-1 rounded border border-slate-800">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );

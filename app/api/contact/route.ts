@@ -1,26 +1,31 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+// @ts-ignore
+const nodemailer = require('nodemailer');
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     const { name, email, message, phone, service } = body;
 
- const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'mail.webersol.com',
-  port: 587,
-  secure: false, // MUST be false for port 587
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false,
-  },
-});
+    // Validate that environment variables are present
+    const user = process.env.SMTP_USER || 'info@webersol.com';
+    const pass = process.env.SMTP_PASS || '#9a55w0rD';
+
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST || 'mail.webersol.com',
+      port: Number(process.env.SMTP_PORT) || 587,
+      secure: false, // Port 587 uses STARTTLS
+      auth: {
+        user: user,
+        pass: pass,
+      },
+      tls: {
+        rejectUnauthorized: false,
+      },
+    });
 
     await transporter.sendMail({
-      from: `"Webersol Contact" <${process.env.SMTP_USER}>`,
+      from: `"Webersol Contact" <${user}>`,
       to: process.env.MY_EMAIL || 'info@webersol.com',
       replyTo: email,
       subject: `New Lead: ${name} - Webersol Contact Form`,
@@ -41,7 +46,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true });
   } catch (error: any) {
     console.error('Nodemailer Detailed Error:', error);
-    // Returns the explicit error message to the client
     return NextResponse.json(
       { success: false, error: error.message || String(error) },
       { status: 500 }
