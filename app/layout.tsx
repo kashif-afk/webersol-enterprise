@@ -18,10 +18,10 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body 
         suppressHydrationWarning 
-        className="bg-transparent text-white antialiased flex flex-col min-h-screen relative"
+        className="bg-[var(--color-obsidian)] text-white antialiased flex flex-col min-h-screen relative overflow-x-hidden"
       >
         <Header />
-        <main className="grow">
+        <main className="flex-1 w-full relative">
           {children}
         </main>
         <Footer />

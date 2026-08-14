@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X, Sparkles } from 'lucide-react';
 
-// Define animation variants for the header container
 const headerVariants = {
   hidden: { y: -20, opacity: 0 },
   visible: {
@@ -19,7 +18,6 @@ const headerVariants = {
   },
 };
 
-// Define animation variants for the mobile drawer
 const drawerVariants = {
   hidden: { opacity: 0, height: 0 },
   visible: { 
@@ -42,7 +40,7 @@ export const Header = () => {
       initial="hidden"
       animate="visible"
       variants={headerVariants}
-      className="relative z-50 w-full backdrop-blur-xl bg-[var(--color-obsidian)]/80 border-b border-slate-800/80 transition-all"
+      className="relative z-50 w-full backdrop-blur-xl bg-[var(--color-obsidian)]/80 border-b border-slate-800/85 transition-all"
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         
@@ -91,7 +89,7 @@ export const Header = () => {
         </button>
       </div>
 
-      {/* Mobile Drawer with Framer Motion animation */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
