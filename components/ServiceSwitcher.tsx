@@ -12,6 +12,7 @@ import {
   ArrowUpRight,
   Sparkles,
 } from 'lucide-react';
+import { Reveal } from './motion/Reveal';
 
 const services = [
   {
@@ -100,28 +101,22 @@ export const ServiceSwitcher = () => {
     <section id="services" className="relative py-24 sm:py-32 overflow-hidden">
       {/* Background ambient glow */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute left-1/2 top-20 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-600/10 blur-[120px]" />
-        <div className="absolute right-0 top-1/2 h-64 w-64 rounded-full bg-cyan-500/5 blur-[100px]" />
+        <div className="absolute left-1/2 top-20 h-72 w-72 -translate-x-1/2 rounded-full bg-steel/10 blur-[120px]" />
+        <div className="absolute right-0 top-1/2 h-64 w-64 rounded-full bg-amber/5 blur-[100px]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
+
         {/* SECTION HEADER */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-          className="mx-auto mb-12 max-w-3xl text-center"
-        >
-          <div className="mb-5 inline-flex items-center gap-2 rounded-lg border border-blue-500/20 bg-blue-500/10 px-3 py-1.5 text-xs font-mono uppercase tracking-wider text-blue-400">
+        <Reveal className="mx-auto mb-12 max-w-3xl text-center">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-lg border border-steel/20 bg-steel/10 px-3 py-1.5 text-xs font-mono uppercase tracking-wider text-steelBright">
             <Sparkles className="h-4 w-4" />
             <span>Enterprise Capabilities</span>
           </div>
 
-          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
+          <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
             Engineered for{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-steel via-steelBright to-white bg-clip-text text-transparent">
               Technical Dominance
             </span>
           </h2>
@@ -129,14 +124,11 @@ export const ServiceSwitcher = () => {
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg">
             From autonomous AI systems to robust financial ERP engines and global cloud infrastructure, we engineer technology that creates measurable business impact.
           </p>
-        </motion.div>
+        </Reveal>
 
         {/* SERVICE TABS - Updated to support 4 columns */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+        <Reveal
+          delay={0.1}
           className="
             relative
             mx-auto
@@ -148,12 +140,13 @@ export const ServiceSwitcher = () => {
             rounded-2xl
             border
             border-slate-800
-            bg-[var(--color-slateGraphite)]/40
+            bg-slateGraphite/40
             p-2
             backdrop-blur-xl
             md:grid-cols-4
           "
         >
+          <div role="tablist" aria-label="Service capabilities" className="contents">
           {services.map((service) => {
             const Icon = service.icon;
             const isActive = activeTab === service.id;
@@ -162,6 +155,11 @@ export const ServiceSwitcher = () => {
               <motion.button
                 key={service.id}
                 type="button"
+                role="tab"
+                id={`service-tab-${service.id}`}
+                aria-selected={isActive}
+                aria-controls="service-panel"
+                tabIndex={isActive ? 0 : -1}
                 onClick={() => setActiveTab(service.id)}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
@@ -178,7 +176,7 @@ export const ServiceSwitcher = () => {
                   duration-300
                   ${
                     isActive
-                      ? 'border-blue-500/40 bg-blue-600/15 text-white shadow-lg shadow-blue-600/10'
+                      ? 'border-steel/40 bg-steel/15 text-white shadow-lg shadow-steel/10'
                       : 'border-transparent text-slate-400 hover:border-slate-700 hover:bg-slate-800/50 hover:text-white'
                   }
                 `}
@@ -192,7 +190,7 @@ export const ServiceSwitcher = () => {
                     transition-opacity
                     duration-500
                     group-hover:opacity-100
-                    bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.14),transparent_65%)]
+                    bg-[radial-gradient(circle_at_50%_0%,rgba(79,179,222,0.14),transparent_65%)]
                   "
                 />
 
@@ -206,7 +204,7 @@ export const ServiceSwitcher = () => {
                       h-px
                       bg-gradient-to-r
                       from-transparent
-                      via-cyan-400
+                      via-steelBright
                       to-transparent
                     "
                   />
@@ -215,16 +213,23 @@ export const ServiceSwitcher = () => {
                 <div className="relative z-10 flex items-center gap-3">
                   <div
                     className={`
-                      flex h-10 w-10 shrink-0 items-center justify-center rounded-lg
+                      relative flex h-10 w-10 shrink-0 items-center justify-center rounded-lg
                       border transition-all duration-300
                       ${
                         isActive
-                          ? 'border-blue-400/30 bg-blue-500/15 text-cyan-400'
-                          : 'border-slate-700 bg-slate-900/50 text-slate-500 group-hover:border-cyan-400/20 group-hover:text-cyan-400'
+                          ? 'border-steel/30 bg-steel/15 text-steelBright'
+                          : 'border-slate-700 bg-slate-900/50 text-slate-500 group-hover:border-steelBright/20 group-hover:text-steelBright'
                       }
                     `}
                   >
-                    <Icon className="h-5 w-5" />
+                    {isActive && (
+                      <span className="absolute inset-0 rounded-lg bg-steelBright/25 blur-md" aria-hidden="true" />
+                    )}
+                    <Icon
+                      className={`relative h-5 w-5 transition-all duration-300 ${
+                        isActive ? 'drop-shadow-[0_0_6px_rgba(79,179,222,0.8)]' : ''
+                      }`}
+                    />
                   </div>
 
                   <div className="min-w-0">
@@ -239,10 +244,14 @@ export const ServiceSwitcher = () => {
               </motion.button>
             );
           })}
-        </motion.div>
+          </div>
+        </Reveal>
 
         {/* MAIN SERVICE PANEL */}
         <div
+          role="tabpanel"
+          id="service-panel"
+          aria-labelledby={`service-tab-${selectedService.id}`}
           className="
             group/panel
             relative
@@ -250,7 +259,7 @@ export const ServiceSwitcher = () => {
             rounded-3xl
             border
             border-slate-800
-            bg-[var(--color-slateGraphite)]/35
+            bg-slateGraphite/35
             shadow-2xl
             shadow-black/20
           "
@@ -264,7 +273,7 @@ export const ServiceSwitcher = () => {
               transition-opacity
               duration-700
               group-hover/panel:opacity-100
-              bg-[radial-gradient(circle_at_20%_0%,rgba(37,99,235,0.10),transparent_40%),radial-gradient(circle_at_90%_100%,rgba(34,211,238,0.06),transparent_40%)]
+              bg-[radial-gradient(circle_at_20%_0%,rgba(43,132,173,0.10),transparent_40%),radial-gradient(circle_at_90%_100%,rgba(245,146,13,0.06),transparent_40%)]
             "
           />
 
@@ -285,6 +294,7 @@ export const ServiceSwitcher = () => {
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.35 }}
                     className="
+                      relative
                       flex
                       h-14
                       w-14
@@ -292,18 +302,19 @@ export const ServiceSwitcher = () => {
                       justify-center
                       rounded-2xl
                       border
-                      border-blue-500/20
-                      bg-blue-500/10
-                      text-cyan-400
+                      border-steel/20
+                      bg-steel/10
+                      text-steelBright
                       shadow-lg
-                      shadow-blue-500/10
+                      shadow-steel/10
                     "
                   >
-                    <ActiveIcon className="h-7 w-7" />
+                    <span className="absolute inset-0 rounded-2xl bg-steelBright/20 blur-lg animate-pulse" aria-hidden="true" />
+                    <ActiveIcon className="relative h-7 w-7 drop-shadow-[0_0_8px_rgba(79,179,222,0.9)]" />
                   </motion.div>
 
                   <div>
-                    <p className="text-xs font-mono uppercase tracking-[0.2em] text-cyan-400">
+                    <p className="text-xs font-mono uppercase tracking-[0.2em] text-steelBright">
                       {selectedService.shortTitle}
                     </p>
                     <p className="mt-1 text-xs text-slate-500">
@@ -313,7 +324,7 @@ export const ServiceSwitcher = () => {
                 </div>
 
                 <div className="mb-6 inline-flex w-fit items-center gap-3 rounded-xl border border-slate-800 bg-slate-950/50 px-4 py-3">
-                  <span className="text-2xl font-bold font-mono text-white">
+                  <span className="text-2xl font-bold font-mono text-amber">
                     {selectedService.metric}
                   </span>
                   <span className="h-6 w-px bg-slate-700" />
@@ -322,7 +333,7 @@ export const ServiceSwitcher = () => {
                   </span>
                 </div>
 
-                <h3 className="max-w-2xl text-2xl font-bold tracking-tight text-white sm:text-4xl">
+                <h3 className="font-display max-w-2xl text-2xl font-bold tracking-tight text-white sm:text-4xl">
                   {selectedService.title}
                 </h3>
 
@@ -343,19 +354,19 @@ export const ServiceSwitcher = () => {
                       items-center
                       gap-2
                       rounded-xl
-                      bg-blue-600
+                      bg-steel
                       px-6
                       py-3.5
                       text-sm
                       font-semibold
                       text-white
                       shadow-lg
-                      shadow-blue-600/20
+                      shadow-steel/20
                       transition-all
                       duration-300
                       hover:-translate-y-0.5
-                      hover:bg-blue-500
-                      hover:shadow-blue-500/30
+                      hover:bg-steelBright
+                      hover:shadow-steelBright/30
                     "
                   >
                     Explore Architecture
@@ -383,7 +394,7 @@ export const ServiceSwitcher = () => {
                     rounded-2xl
                     border
                     border-slate-800
-                    bg-[var(--color-obsidian)]/80
+                    bg-obsidian/80
                     p-6
                     sm:p-8
                   "
@@ -397,7 +408,7 @@ export const ServiceSwitcher = () => {
                       h-48
                       w-48
                       rounded-full
-                      bg-blue-500/10
+                      bg-steel/10
                       blur-3xl
                     "
                   />
@@ -414,7 +425,7 @@ export const ServiceSwitcher = () => {
                       </div>
 
                       <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-800 bg-slate-900/70">
-                        <CheckCircle2 className="h-4 w-4 text-cyan-400" />
+                        <CheckCircle2 className="h-4 w-4 text-steelBright" />
                       </div>
                     </div>
 
@@ -453,8 +464,8 @@ export const ServiceSwitcher = () => {
                               items-center
                               justify-center
                               rounded-full
-                              bg-cyan-400/10
-                              text-cyan-400
+                              bg-steelBright/10
+                              text-steelBright
                             "
                           >
                             <CheckCircle2 className="h-3.5 w-3.5" />
@@ -472,7 +483,7 @@ export const ServiceSwitcher = () => {
                         <span className="text-xs text-slate-500">
                           Performance Benchmark
                         </span>
-                        <span className="text-xs font-mono font-semibold text-cyan-400">
+                        <span className="text-xs font-mono font-semibold text-steelBright">
                           {selectedService.stats}
                         </span>
                       </div>
@@ -485,11 +496,8 @@ export const ServiceSwitcher = () => {
         </div>
 
         {/* BOTTOM TRUST STRIP */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+        <Reveal
+          delay={0.2}
           className="mt-6 flex flex-col items-center justify-between gap-3 text-center sm:flex-row sm:text-left"
         >
           <p className="text-xs text-slate-500">
@@ -507,7 +515,7 @@ export const ServiceSwitcher = () => {
               font-semibold
               text-slate-400
               transition-colors
-              hover:text-cyan-400
+              hover:text-steelBright
             "
           >
             Discuss your architecture
@@ -521,7 +529,7 @@ export const ServiceSwitcher = () => {
               "
             />
           </Link>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   );

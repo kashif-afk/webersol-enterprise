@@ -14,6 +14,7 @@ import {
   TrendingUp,
   Zap,
 } from 'lucide-react';
+import { Reveal } from './motion/Reveal';
 
 type Scope = 'mvp' | 'growth' | 'enterprise';
 
@@ -31,7 +32,7 @@ export const InteractiveEstimator = () => {
       base: 4500,
       hours: 120,
       complexity: 'Focused',
-      color: 'blue',
+      color: 'steel',
     },
     growth: {
       name: 'Scale',
@@ -40,7 +41,7 @@ export const InteractiveEstimator = () => {
       base: 12500,
       hours: 450,
       complexity: 'Advanced',
-      color: 'cyan',
+      color: 'steelBright',
     },
     enterprise: {
       name: 'Enterprise',
@@ -49,11 +50,17 @@ export const InteractiveEstimator = () => {
       base: 28000,
       hours: 1200,
       complexity: 'Enterprise',
-      color: 'purple',
+      color: 'amber',
     },
   };
 
   const currentScope = scopeConfig[scope];
+
+  const tierAccent: Record<string, { ring: string; dot: string; label: string }> = {
+    steel: { ring: 'border-steel/70 bg-steel/10 shadow-lg shadow-steel/10', dot: 'bg-steel', label: 'text-steel' },
+    steelBright: { ring: 'border-steelBright/70 bg-steelBright/10 shadow-lg shadow-steelBright/10', dot: 'bg-steelBright', label: 'text-steelBright' },
+    amber: { ring: 'border-amber/70 bg-amber/10 shadow-lg shadow-amber/10', dot: 'bg-amber', label: 'text-amber' },
+  };
 
   /*
    * Timeline adjustment:
@@ -110,26 +117,26 @@ export const InteractiveEstimator = () => {
   return (
     <section
       id="estimator"
-      className="relative overflow-hidden py-24 bg-[#080C14]"
+      className="relative overflow-hidden py-24 bg-abyss"
     >
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-1/4 w-[500px] h-[500px] bg-blue-600/10 blur-[140px] rounded-full" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-cyan-500/5 blur-[120px] rounded-full" />
+        <div className="absolute top-20 left-1/4 w-[500px] h-[500px] bg-steel/10 blur-[140px] rounded-full" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-amber/5 blur-[120px] rounded-full" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/20 bg-blue-500/5 text-blue-300 text-xs font-mono uppercase tracking-wider mb-6">
+        <Reveal className="max-w-3xl mx-auto text-center mb-14">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-steel/20 bg-steel/5 text-steelBright text-xs font-mono uppercase tracking-wider mb-6">
             <Sparkles className="w-4 h-4" />
             Interactive Project Intelligence
           </div>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white">
             Model Your{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-steel via-steelBright to-white">
               Project & ROI
             </span>
           </h2>
@@ -139,19 +146,19 @@ export const InteractiveEstimator = () => {
             investment range, delivery timeline, and potential automation
             impact in seconds.
           </p>
-        </div>
+        </Reveal>
 
         {/* Main Calculator */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
           {/* LEFT — Configuration */}
-          <div className="lg:col-span-7 rounded-3xl border border-slate-800 bg-[#0D131E]/90 backdrop-blur-xl p-6 sm:p-8">
+          <Reveal delay={0.1} className="lg:col-span-7 rounded-3xl border border-slate-800 bg-surface/90 backdrop-blur-xl p-6 sm:p-8">
 
             {/* Step 1 */}
             <div className="mb-10">
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-                  <Layers3 className="w-4 h-4 text-blue-400" />
+                <div className="w-8 h-8 rounded-lg bg-steel/10 border border-steel/20 flex items-center justify-center">
+                  <Layers3 className="w-4 h-4 text-steelBright" />
                 </div>
 
                 <div>
@@ -164,7 +171,7 @@ export const InteractiveEstimator = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3" role="group" aria-label="Architecture tier">
                 {(
                   Object.entries(scopeConfig) as [
                     Scope,
@@ -172,26 +179,29 @@ export const InteractiveEstimator = () => {
                   ][]
                 ).map(([id, tier]) => {
                   const active = scope === id;
+                  const accent = tierAccent[tier.color];
 
                   return (
                     <button
                       key={id}
                       onClick={() => setScope(id)}
+                      aria-pressed={active}
+                      aria-label={tier.title}
                       className={`relative text-left p-4 rounded-2xl border transition-all duration-300 ${
                         active
-                          ? 'border-blue-500/70 bg-blue-500/10 shadow-lg shadow-blue-500/10'
-                          : 'border-slate-800 bg-[#090E17] hover:border-slate-700'
+                          ? accent.ring
+                          : 'border-slate-800 bg-surfaceInset hover:border-slate-700'
                       }`}
                     >
                       {active && (
-                        <div className="absolute top-3 right-3 w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center">
-                          <Check className="w-3 h-3 text-white" />
+                        <div className={`absolute top-3 right-3 w-5 h-5 rounded-full ${accent.dot} flex items-center justify-center`}>
+                          <Check className="w-3 h-3 text-obsidian" />
                         </div>
                       )}
 
                       <p
                         className={`text-xs font-mono uppercase tracking-wider mb-2 ${
-                          active ? 'text-blue-400' : 'text-slate-500'
+                          active ? accent.label : 'text-slate-500'
                         }`}
                       >
                         {tier.name}
@@ -213,8 +223,8 @@ export const InteractiveEstimator = () => {
             {/* Step 2 */}
             <div className="mb-10">
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-                  <Cpu className="w-4 h-4 text-cyan-400" />
+                <div className="w-8 h-8 rounded-lg bg-steelBright/10 border border-steelBright/20 flex items-center justify-center">
+                  <Cpu className="w-4 h-4 text-steelBright" />
                 </div>
 
                 <div>
@@ -233,13 +243,13 @@ export const InteractiveEstimator = () => {
                 <label
                   className={`flex items-center justify-between gap-4 p-4 rounded-2xl border cursor-pointer transition-all ${
                     aiIntegration
-                      ? 'border-cyan-500/30 bg-cyan-500/5'
-                      : 'border-slate-800 bg-[#090E17]'
+                      ? 'border-steelBright/30 bg-steelBright/5'
+                      : 'border-slate-800 bg-surfaceInset'
                   }`}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center">
-                      <Sparkles className="w-5 h-5 text-cyan-400" />
+                    <div className="w-10 h-10 rounded-xl bg-steelBright/10 flex items-center justify-center">
+                      <Sparkles className="w-5 h-5 text-steelBright" />
                     </div>
 
                     <div>
@@ -257,7 +267,7 @@ export const InteractiveEstimator = () => {
                     type="checkbox"
                     checked={aiIntegration}
                     onChange={(e) => setAiIntegration(e.target.checked)}
-                    className="w-5 h-5 accent-cyan-500"
+                    className="w-5 h-5 accent-steelBright"
                   />
                 </label>
 
@@ -265,13 +275,13 @@ export const InteractiveEstimator = () => {
                 <label
                   className={`flex items-center justify-between gap-4 p-4 rounded-2xl border cursor-pointer transition-all ${
                     cloudScale
-                      ? 'border-blue-500/30 bg-blue-500/5'
-                      : 'border-slate-800 bg-[#090E17]'
+                      ? 'border-steel/30 bg-steel/5'
+                      : 'border-slate-800 bg-surfaceInset'
                   }`}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
-                      <Cloud className="w-5 h-5 text-blue-400" />
+                    <div className="w-10 h-10 rounded-xl bg-steel/10 flex items-center justify-center">
+                      <Cloud className="w-5 h-5 text-steel" />
                     </div>
 
                     <div>
@@ -289,7 +299,7 @@ export const InteractiveEstimator = () => {
                     type="checkbox"
                     checked={cloudScale}
                     onChange={(e) => setCloudScale(e.target.checked)}
-                    className="w-5 h-5 accent-blue-500"
+                    className="w-5 h-5 accent-steel"
                   />
                 </label>
               </div>
@@ -299,8 +309,8 @@ export const InteractiveEstimator = () => {
             <div>
               <div className="flex justify-between items-end mb-5">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
-                    <Clock3 className="w-4 h-4 text-indigo-400" />
+                  <div className="w-8 h-8 rounded-lg bg-steel/10 border border-steel/20 flex items-center justify-center">
+                    <Clock3 className="w-4 h-4 text-steelBright" />
                   </div>
 
                   <div>
@@ -313,7 +323,7 @@ export const InteractiveEstimator = () => {
                   </div>
                 </div>
 
-                <span className="text-lg font-mono font-bold text-cyan-400">
+                <span className="text-lg font-mono font-bold text-steelBright">
                   {timelineWeeks} weeks
                 </span>
               </div>
@@ -327,7 +337,9 @@ export const InteractiveEstimator = () => {
                 onChange={(e) =>
                   setTimelineWeeks(Number(e.target.value))
                 }
-                className="w-full accent-blue-500 cursor-pointer"
+                aria-label="Target delivery timeline in weeks"
+                aria-valuetext={`${timelineWeeks} weeks`}
+                className="w-full accent-steel cursor-pointer"
               />
 
               <div className="flex justify-between mt-2 text-[10px] font-mono text-slate-600">
@@ -337,14 +349,14 @@ export const InteractiveEstimator = () => {
                 <span>16 WEEKS</span>
               </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* RIGHT — Results */}
-          <div className="lg:col-span-5">
-            <div className="relative h-full rounded-3xl border border-blue-500/20 bg-gradient-to-b from-[#111C31] via-[#0C1422] to-[#080C14] p-6 sm:p-8 overflow-hidden">
+          <Reveal delay={0.2} className="lg:col-span-5">
+            <div className="relative h-full rounded-3xl border border-steel/20 bg-gradient-to-b from-surface via-abyss to-abyss p-6 sm:p-8 overflow-hidden">
 
               {/* Glow */}
-              <div className="absolute -top-32 -right-32 w-72 h-72 bg-blue-500/10 blur-[100px] rounded-full" />
+              <div className="absolute -top-32 -right-32 w-72 h-72 bg-steel/10 blur-[100px] rounded-full" />
 
               <div className="relative">
 
@@ -355,13 +367,13 @@ export const InteractiveEstimator = () => {
                       Your Project Profile
                     </p>
 
-                    <h3 className="text-xl font-bold text-white mt-1">
+                    <h3 className="font-display text-xl font-bold text-white mt-1">
                       {currentScope.title}
                     </h3>
                   </div>
 
-                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-                    <Gauge className="w-5 h-5 text-blue-400" />
+                  <div className="w-10 h-10 rounded-xl bg-steel/10 border border-steel/20 flex items-center justify-center">
+                    <Gauge className="w-5 h-5 text-steelBright" />
                   </div>
                 </div>
 
@@ -372,7 +384,7 @@ export const InteractiveEstimator = () => {
                   </p>
 
                   <div className="flex items-end gap-2 mt-2">
-                    <span className="text-4xl sm:text-5xl font-extrabold font-mono text-white">
+                    <span className="text-4xl sm:text-5xl font-extrabold font-mono text-amber">
                       ${minEstimate.toLocaleString()}
                     </span>
 
@@ -390,8 +402,8 @@ export const InteractiveEstimator = () => {
                 {/* Metrics */}
                 <div className="grid grid-cols-2 gap-3 mb-6">
 
-                  <div className="p-4 rounded-2xl bg-[#090E17] border border-slate-800">
-                    <Clock3 className="w-4 h-4 text-cyan-400 mb-3" />
+                  <div className="p-4 rounded-2xl bg-surfaceInset border border-slate-800">
+                    <Clock3 className="w-4 h-4 text-steelBright mb-3" />
 
                     <p className="text-2xl font-bold text-white font-mono">
                       {timelineWeeks}
@@ -402,8 +414,8 @@ export const InteractiveEstimator = () => {
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-[#090E17] border border-slate-800">
-                    <Zap className="w-4 h-4 text-yellow-400 mb-3" />
+                  <div className="p-4 rounded-2xl bg-surfaceInset border border-slate-800">
+                    <Zap className="w-4 h-4 text-amber mb-3" />
 
                     <p className="text-2xl font-bold text-white font-mono">
                       {monthlyHoursSaved}
@@ -414,8 +426,8 @@ export const InteractiveEstimator = () => {
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-[#090E17] border border-slate-800">
-                    <TrendingUp className="w-4 h-4 text-green-400 mb-3" />
+                  <div className="p-4 rounded-2xl bg-surfaceInset border border-slate-800">
+                    <TrendingUp className="w-4 h-4 text-success mb-3" />
 
                     <p className="text-2xl font-bold text-white font-mono">
                       {productivityGain}%
@@ -426,8 +438,8 @@ export const InteractiveEstimator = () => {
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-[#090E17] border border-slate-800">
-                    <Gauge className="w-4 h-4 text-purple-400 mb-3" />
+                  <div className="p-4 rounded-2xl bg-surfaceInset border border-slate-800">
+                    <Gauge className="w-4 h-4 text-steel mb-3" />
 
                     <p className="text-lg font-bold text-white">
                       {deliveryConfidence}
@@ -448,14 +460,14 @@ export const InteractiveEstimator = () => {
                   <div className="space-y-3">
 
                     <div className="flex items-center gap-3 text-sm">
-                      <Check className="w-4 h-4 text-cyan-400" />
+                      <Check className="w-4 h-4 text-steelBright" />
                       <span className="text-slate-300">
                         {currentScope.complexity} architecture
                       </span>
                     </div>
 
                     <div className="flex items-center gap-3 text-sm">
-                      <Check className="w-4 h-4 text-cyan-400" />
+                      <Check className="w-4 h-4 text-steelBright" />
                       <span className="text-slate-300">
                         {aiIntegration
                           ? 'Agentic AI enabled'
@@ -464,7 +476,7 @@ export const InteractiveEstimator = () => {
                     </div>
 
                     <div className="flex items-center gap-3 text-sm">
-                      <Check className="w-4 h-4 text-cyan-400" />
+                      <Check className="w-4 h-4 text-steelBright" />
                       <span className="text-slate-300">
                         {cloudScale
                           ? 'Cloud scalability enabled'
@@ -473,7 +485,7 @@ export const InteractiveEstimator = () => {
                     </div>
 
                     <div className="flex items-center gap-3 text-sm">
-                      <Check className="w-4 h-4 text-cyan-400" />
+                      <Check className="w-4 h-4 text-steelBright" />
                       <span className="text-slate-300">
                         ~{annualHoursSaved.toLocaleString()} hrs/year
                         capacity recovery potential
@@ -486,7 +498,7 @@ export const InteractiveEstimator = () => {
                 {/* CTA */}
                 <a
                   href="#contact"
-                  className="group w-full py-4 px-5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl flex items-center justify-center gap-3 transition-all shadow-lg shadow-blue-600/20"
+                  className="group w-full py-4 px-5 bg-amber hover:bg-amberBright text-obsidian font-semibold rounded-xl flex items-center justify-center gap-3 transition-all shadow-lg shadow-amber/20"
                 >
                   <span>Get My Detailed Estimate</span>
 
@@ -500,14 +512,14 @@ export const InteractiveEstimator = () => {
 
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
 
         {/* Bottom Trust Bar */}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <Reveal delay={0.3} className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
 
-          <div className="flex items-center gap-3 p-4 rounded-2xl border border-slate-800 bg-[#0B1019]">
-            <ShieldCheck className="w-5 h-5 text-blue-400" />
+          <div className="flex items-center gap-3 p-4 rounded-2xl border border-slate-800 bg-surface">
+            <ShieldCheck className="w-5 h-5 text-steel" />
             <div>
               <p className="text-sm font-semibold text-white">
                 Enterprise-Ready
@@ -518,8 +530,8 @@ export const InteractiveEstimator = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 p-4 rounded-2xl border border-slate-800 bg-[#0B1019]">
-            <Cpu className="w-5 h-5 text-cyan-400" />
+          <div className="flex items-center gap-3 p-4 rounded-2xl border border-slate-800 bg-surface">
+            <Cpu className="w-5 h-5 text-steelBright" />
             <div>
               <p className="text-sm font-semibold text-white">
                 AI-Native Engineering
@@ -530,8 +542,8 @@ export const InteractiveEstimator = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 p-4 rounded-2xl border border-slate-800 bg-[#0B1019]">
-            <TrendingUp className="w-5 h-5 text-green-400" />
+          <div className="flex items-center gap-3 p-4 rounded-2xl border border-slate-800 bg-surface">
+            <TrendingUp className="w-5 h-5 text-success" />
             <div>
               <p className="text-sm font-semibold text-white">
                 Built for Scale
@@ -542,7 +554,7 @@ export const InteractiveEstimator = () => {
             </div>
           </div>
 
-        </div>
+        </Reveal>
       </div>
     </section>
   );

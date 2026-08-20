@@ -1,0 +1,7 @@
+# Next's static export writes the OG image as an extensionless file;
+# force the correct Content-Type so social-media crawlers accept it.
+<IfModule mod_mime.c>
+  <Files "opengraph-image">
+    ForceType image/png
+  </Files>
+</IfModule>

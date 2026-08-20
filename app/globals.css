@@ -2,9 +2,25 @@
 
 @theme {
   --color-obsidian: #0B0F17;
+  --color-abyss: #080B12;
+  --color-surface: #101724;
+  --color-surfaceInset: #0A0F19;
   --color-slateGraphite: #1E293B;
-  --color-electricBlue: #2563EB;
-  --color-cyanAccent: #06B6D4;
+
+  --color-steel: #2B84AD;
+  --color-steelBright: #4FB3DE;
+  --color-steelDim: #123244;
+
+  --color-amber: #F5920D;
+  --color-amberBright: #FFAE3F;
+  --color-amberDim: #3A2308;
+
+  --color-success: #34D399;
+  --color-danger: #F87171;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-sans);
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
 }
 
 @layer base {
@@ -34,5 +50,16 @@
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-electricBlue);
+  background: var(--color-steel);
+}
+
+/* SDLC infinity-loop diagram: flowing highlight animated along the ring stroke,
+   reading as fluid/energy moving through the loop. */
+@keyframes sdlc-flow {
+  to {
+    stroke-dashoffset: -80;
+  }
+}
+.sdlc-flow {
+  animation: sdlc-flow 2.4s linear infinite;
 }

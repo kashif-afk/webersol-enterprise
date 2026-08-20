@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
 import { Menu, X, Sparkles } from 'lucide-react';
+
+const STORY_SECTION_IDS = ['hero-section', 'services', 'process'];
 
 const headerVariants = {
   hidden: { y: -20, opacity: 0 },
@@ -32,18 +34,45 @@ const drawerVariants = {
   }
 };
 
+const CHAPTER_LABELS = ['Arrival', 'Capabilities', 'Process'];
+
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 300, damping: 40, restDelta: 0.001 });
+  const [activeChapter, setActiveChapter] = useState<number | null>(null);
+
+  useEffect(() => {
+    const elements = STORY_SECTION_IDS.map((id) => document.getElementById(id)).filter(
+      (el): el is HTMLElement => !!el
+    );
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = elements.indexOf(entry.target as HTMLElement);
+            if (index !== -1) setActiveChapter(index);
+          }
+        });
+      },
+      { rootMargin: '-40% 0px -40% 0px' }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <motion.header
       initial="hidden"
       animate="visible"
       variants={headerVariants}
-      className="relative z-50 w-full backdrop-blur-xl bg-[var(--color-obsidian)]/80 border-b border-slate-800/85 transition-all"
+      className="relative z-50 w-full backdrop-blur-xl bg-obsidian/80 border-b border-slate-800/85 transition-all"
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        
+
        {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative h-19 w-52 sm:w-65 ">
@@ -58,21 +87,31 @@ export const Header = () => {
           </div>
         </Link>
 
+        {/* Story chapter indicator — tracks Hero / Services / Process */}
+        {activeChapter !== null && (
+          <div className="hidden lg:flex items-center gap-2 font-mono text-[11px] text-slate-500">
+            <span className="text-steelBright">{String(activeChapter + 1).padStart(2, '0')}</span>
+            <span>/</span>
+            <span>{String(STORY_SECTION_IDS.length).padStart(2, '0')}</span>
+            <span className="ml-1 uppercase tracking-wider">{CHAPTER_LABELS[activeChapter]}</span>
+          </div>
+        )}
+
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-          <Link href="/#services" className="hover:text-cyan-400 transition-colors">Services</Link>
-          <Link href="/#estimator" className="hover:text-cyan-400 transition-colors flex items-center gap-1.5">
+          <Link href="/#services" className="hover:text-steelBright transition-colors">Services</Link>
+          <Link href="/#estimator" className="hover:text-steelBright transition-colors flex items-center gap-1.5">
             <span>ROI Estimator</span>
-            <span className="px-1.5 py-0.5 text-[10px] bg-blue-500/20 text-blue-400 rounded-full font-mono border border-blue-500/30">Interactive</span>
+            <span className="px-1.5 py-0.5 text-[10px] bg-amber/15 text-amber rounded-full font-mono border border-amber/30">Interactive</span>
           </Link>
-          <Link href="/#case-studies" className="hover:text-cyan-400 transition-colors">Case Studies</Link>
+          <Link href="/#case-studies" className="hover:text-steelBright transition-colors">Case Studies</Link>
         </nav>
 
         {/* Action Button */}
         <div className="hidden md:flex items-center gap-4">
           <Link
             href="/#contact"
-            className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm flex items-center gap-2 transition-all shadow-md shadow-blue-600/20"
+            className="px-5 py-2.5 rounded-xl bg-steel hover:bg-steelBright text-white font-semibold text-sm flex items-center gap-2 transition-all shadow-md shadow-steel/20"
           >
             <Sparkles className="w-4 h-4" />
             <span>Estimate Project</span>
@@ -84,29 +123,38 @@ export const Header = () => {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="md:hidden text-slate-300 hover:text-white p-2"
           aria-label="Toggle Menu"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
+
+      {/* Scroll progress indicator */}
+      <motion.div
+        style={{ scaleX, transformOrigin: '0%' }}
+        className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-steel via-steelBright to-amber pointer-events-none"
+      />
 
       {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             key="mobile-drawer"
+            id="mobile-menu"
             initial="hidden"
             animate="visible"
             exit="exit"
             variants={drawerVariants}
-            className="md:hidden bg-[var(--color-obsidian)] border-b border-slate-800 px-6 py-6 space-y-4 overflow-hidden"
+            className="md:hidden bg-obsidian border-b border-slate-800 px-6 py-6 space-y-4 overflow-hidden"
           >
-            <Link href="/#services" onClick={() => setMobileMenuOpen(false)} className="block text-slate-300 hover:text-cyan-400 font-medium py-1.5">Services</Link>
-            <Link href="/#estimator" onClick={() => setMobileMenuOpen(false)} className="block text-slate-300 hover:text-cyan-400 font-medium py-1.5">ROI Estimator</Link>
-            <Link href="/#case-studies" onClick={() => setMobileMenuOpen(false)} className="block text-slate-300 hover:text-cyan-400 font-medium py-1.5">Case Studies</Link>
+            <Link href="/#services" onClick={() => setMobileMenuOpen(false)} className="block text-slate-300 hover:text-steelBright font-medium py-1.5">Services</Link>
+            <Link href="/#estimator" onClick={() => setMobileMenuOpen(false)} className="block text-slate-300 hover:text-steelBright font-medium py-1.5">ROI Estimator</Link>
+            <Link href="/#case-studies" onClick={() => setMobileMenuOpen(false)} className="block text-slate-300 hover:text-steelBright font-medium py-1.5">Case Studies</Link>
             <Link
               href="/#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full mt-4 px-5 py-3 rounded-xl bg-blue-600 text-white font-semibold text-center block"
+              className="w-full mt-4 px-5 py-3 rounded-xl bg-steel text-white font-semibold text-center block"
             >
               Estimate Project
             </Link>

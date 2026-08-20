@@ -1,8 +1,27 @@
 import type { Metadata } from "next";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FloatingAIBot } from "@/components/FloatingAIBot";
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://webersol.com"),
@@ -75,14 +94,6 @@ export const metadata: Metadata = {
     title: "Webersol | AI Automation & Software Engineering",
     description:
       "Enterprise AI, intelligent automation, custom software engineering, cloud solutions, and business systems built for scale.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Webersol - AI Automation & Software Engineering",
-      },
-    ],
   },
 
   // X / Twitter
@@ -91,7 +102,6 @@ export const metadata: Metadata = {
     title: "Webersol | AI Automation & Software Engineering",
     description:
       "Enterprise AI, intelligent automation, custom software engineering, cloud solutions, and business systems built for scale.",
-    images: ["/og-image.png"],
   },
 
   // Canonical URL
@@ -116,7 +126,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className="bg-[var(--color-obsidian)] text-white antialiased flex flex-col min-h-screen relative overflow-x-hidden"
+        className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} bg-obsidian text-white antialiased flex flex-col min-h-screen relative overflow-x-hidden font-sans`}
       >
         <Header />
 
