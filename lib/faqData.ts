@@ -39,7 +39,7 @@ export const FAQ_TOPICS: Record<string, FaqTopic> = {
     id: 'contact',
     label: 'How do I get in touch?',
     answer:
-      'You can reach us directly at info@webersol.com or +92 335 4654941, or use the consultation form below — our lead architects and CTO review every request personally.',
+      'You can reach us directly at info@webersol.com or +1 872 284 3026, or use the consultation form below — our lead architects and CTO review every request personally.',
   },
 };
 

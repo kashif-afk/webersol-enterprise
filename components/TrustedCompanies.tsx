@@ -2,15 +2,25 @@
 
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Shield, Zap, Globe, Cpu, Cloud, Terminal } from 'lucide-react';
+import { Shield, Cloud } from 'lucide-react';
+import { siOdoo, siVercel, siGooglecloud, siNextdotjs } from 'simple-icons';
+
+// Renders a simple-icons brand mark as a monochrome SVG (fill="currentColor"),
+// matching the lucide icons it sits alongside — never the brand's own color,
+// per the "no colored logo" requirement for this slider.
+const BrandMark = ({ path }: { path: string }) => (
+  <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden="true">
+    <path d={path} />
+  </svg>
+);
 
 const partners = [
-  { name: 'Odoo Enterprise', icon: Globe, badge: 'Official Partner' },
-  { name: 'AWS Cloud', icon: Cloud, badge: 'Advanced Tier' },
-  { name: 'Vercel Infrastructure', icon: Zap, badge: 'Edge Network' },
-  { name: 'Google Cloud AI', icon: Cpu, badge: 'LLM Integrator' },
-  { name: 'Next.js Ecosystem', icon: Terminal, badge: 'Core Stack' },
-  { name: 'SOC2 Security', icon: Shield, badge: 'Type II Compliant' },
+  { name: 'Odoo Enterprise', icon: <BrandMark path={siOdoo.path} />, badge: 'Official Partner' },
+  { name: 'AWS Cloud', icon: <Cloud className="w-4 h-4" />, badge: 'Advanced Tier' },
+  { name: 'Vercel Infrastructure', icon: <BrandMark path={siVercel.path} />, badge: 'Edge Network' },
+  { name: 'Google Cloud AI', icon: <BrandMark path={siGooglecloud.path} />, badge: 'LLM Integrator' },
+  { name: 'Next.js Ecosystem', icon: <BrandMark path={siNextdotjs.path} />, badge: 'Core Stack' },
+  { name: 'SOC2 Security', icon: <Shield className="w-4 h-4" />, badge: 'Type II Compliant' },
 ];
 
 export const TrustedCompanies = () => {
@@ -36,7 +46,6 @@ export const TrustedCompanies = () => {
         >
           {/* Duplicate array to create a seamless infinite loop; second half is decorative for screen readers */}
           {[...partners, ...partners].map((partner, index) => {
-            const Icon = partner.icon;
             const isDuplicate = index >= partners.length;
             return (
               <div
@@ -45,7 +54,7 @@ export const TrustedCompanies = () => {
                 className="flex items-center gap-3.5 px-6 py-3.5 rounded-xl border border-slate-800/80 bg-slateGraphite/30 backdrop-blur-md shrink-0 hover:border-slate-700 transition-colors"
               >
                 <div className="p-2 rounded-lg bg-steel/10 border border-steel/20 text-steelBright">
-                  <Icon className="w-4 h-4" />
+                  {partner.icon}
                 </div>
                 <div>
                   <span className="text-sm font-bold text-white tracking-wide block">

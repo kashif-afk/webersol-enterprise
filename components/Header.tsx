@@ -100,6 +100,7 @@ export const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+          <Link href="/about" className="hover:text-steelBright transition-colors">About Us</Link>
           <Link href="/marketing" className="hover:text-steelBright transition-colors">Marketing</Link>
           <Link href="/#services" className="hover:text-steelBright transition-colors">Services</Link>
           <Link href="/#estimator" className="hover:text-steelBright transition-colors flex items-center gap-1.5">
@@ -154,6 +155,7 @@ export const Header = () => {
             variants={drawerVariants}
             className="md:hidden bg-obsidian border-b border-slate-800 px-6 py-6 space-y-4 overflow-hidden"
           >
+            <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="block text-slate-300 hover:text-steelBright font-medium py-1.5">About Us</Link>
             <Link href="/marketing" onClick={() => setMobileMenuOpen(false)} className="block text-slate-300 hover:text-steelBright font-medium py-1.5">Marketing</Link>
             <Link href="/#services" onClick={() => setMobileMenuOpen(false)} className="block text-slate-300 hover:text-steelBright font-medium py-1.5">Services</Link>
             <Link href="/#estimator" onClick={() => setMobileMenuOpen(false)} className="block text-slate-300 hover:text-steelBright font-medium py-1.5">ROI Estimator</Link>

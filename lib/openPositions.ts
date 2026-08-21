@@ -39,7 +39,7 @@ export const openPositions: OpenPosition[] = [
     id: 'financial-systems-engineer',
     title: 'Financial Systems Engineer',
     department: 'Financial ERP',
-    location: 'Waterbury, CT',
+    location: 'New York, NY',
     type: 'Full-time',
     description:
       'Architect double-entry ledger systems, reconciliation pipelines, and audit-grade financial infrastructure.',

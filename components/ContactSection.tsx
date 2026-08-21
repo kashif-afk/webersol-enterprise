@@ -125,7 +125,7 @@ export const ContactSection = ({
               <Phone className="w-5 h-5 text-steel shrink-0" />
               <div>
                 <p className="text-xs text-slate-400">Direct Line / WhatsApp</p>
-                <p className="text-white font-bold">+92 335 4654941</p>
+                <p className="text-white font-bold">+1 872 284 3026</p>
               </div>
             </div>
 
@@ -133,7 +133,7 @@ export const ContactSection = ({
               <MapPin className="w-5 h-5 text-steel shrink-0" />
               <div>
                 <p className="text-xs text-slate-400">Headquarters</p>
-                <p className="text-white font-bold">Waterbury, Connecticut, USA</p>
+                <p className="text-white font-bold">105 West 28th Street, New York, NY 10001</p>
               </div>
             </div>
           </div>

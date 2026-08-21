@@ -32,7 +32,7 @@ const VALUES = [
 ];
 
 const PRESENCE = [
-  { icon: MapPin, title: 'Waterbury, CT', description: 'US headquarters and client-facing team.' },
+  { icon: MapPin, title: 'New York, NY', description: 'US headquarters and client-facing team.' },
   { icon: MapPin, title: 'Lahore, PK', description: 'Core engineering and AI automation team.' },
   { icon: Compass, title: 'Remote-first', description: 'Distributed team collaborating across time zones daily.' },
 ];
