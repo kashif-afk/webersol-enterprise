@@ -50,7 +50,16 @@ export const ChatWidget = ({ open, onClose, triggerRef }: ChatWidgetProps) => {
     };
   }, [open, messages.length]);
 
+  const prevOpenRef = useRef(open);
   useEffect(() => {
+    // Only move focus on an actual open/close transition — comparing against
+    // the previous value (rather than an invocation-count guard) survives
+    // React Strict Mode's double effect-invocation in dev. Without this,
+    // mount would stamp a default focus ring on the floating trigger button
+    // before the user ever interacts with it.
+    if (prevOpenRef.current === open) return;
+    prevOpenRef.current = open;
+
     if (open) {
       panelRef.current?.focus();
     } else {
@@ -200,7 +209,7 @@ export const ChatWidget = ({ open, onClose, triggerRef }: ChatWidgetProps) => {
             <div className="p-3 border-t border-slate-800 bg-slateGraphite/30">
               <button
                 onClick={handleTalkToHuman}
-                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-amber hover:bg-amberBright text-obsidian text-sm font-semibold transition-colors"
+                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-amber hover:bg-amberBright text-onAccent text-sm font-semibold transition-colors"
               >
                 <Send className="w-3.5 h-3.5" />
                 Talk to a human

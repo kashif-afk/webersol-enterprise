@@ -1,10 +1,9 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import Link from 'next/link';
 import {
   ArrowRight,
-  CheckCircle2,
   Cloud,
   Code2,
   Database,
@@ -13,8 +12,13 @@ import {
   Lock,
   Server,
   Shield,
+  CheckCircle2,
   Zap,
 } from 'lucide-react';
+import { Reveal } from '@/components/motion/Reveal';
+import { SpotlightCard } from '@/components/SpotlightCard';
+import { GlowIcon } from '@/components/GlowIcon';
+import { SignatureOrbit } from '@/components/motifs/SignatureOrbit';
 
 const capabilities = [
   {
@@ -62,760 +66,213 @@ const architectureLayers = [
   {
     icon: Code2,
     title: 'Application Layer',
-    description:
-      'Modern web applications, APIs, microservices, and business logic engineered for reliability and maintainability.',
+    description: 'Modern web applications, APIs, microservices, and business logic engineered for reliability and maintainability.',
   },
   {
     icon: Server,
     title: 'Infrastructure Layer',
-    description:
-      'Containerized and automated infrastructure designed for predictable deployments and horizontal scalability.',
+    description: 'Containerized and automated infrastructure designed for predictable deployments and horizontal scalability.',
   },
   {
     icon: Database,
     title: 'Data Layer',
-    description:
-      'Reliable database, caching, storage, and messaging systems optimized for performance and availability.',
+    description: 'Reliable database, caching, storage, and messaging systems optimized for performance and availability.',
   },
   {
     icon: Lock,
     title: 'Security Layer',
-    description:
-      'Authentication, authorization, secrets management, monitoring, and security controls embedded across the stack.',
+    description: 'Authentication, authorization, secrets management, monitoring, and security controls embedded across the stack.',
   },
 ];
 
 const engineeringMetrics = [
-  {
-    value: '99.99%',
-    label: 'Target Availability',
-    description: 'High-availability architecture',
-  },
-  {
-    value: '<1s',
-    label: 'Performance Target',
-    description: 'Optimized application response',
-  },
-  {
-    value: '24/7',
-    label: 'Observability',
-    description: 'Monitoring & system visibility',
-  },
-  {
-    value: 'Zero',
-    label: 'Manual Deployments',
-    description: 'Automated CI/CD workflows',
-  },
+  { value: '99.99%', label: 'Target Availability', description: 'High-availability architecture' },
+  { value: '<1s', label: 'Performance Target', description: 'Optimized application response' },
+  { value: '24/7', label: 'Observability', description: 'Monitoring & system visibility' },
+  { value: 'Zero', label: 'Manual Deployments', description: 'Automated CI/CD workflows' },
+];
+
+const ORBIT_ITEMS = [
+  { icon: Cloud, label: 'Infrastructure' },
+  { icon: Database, label: 'Data' },
+  { icon: Shield, label: 'Security' },
+  { icon: Lock, label: 'Access Control' },
 ];
 
 export default function CustomEngineeringPage() {
   return (
-    <main className="min-h-screen bg-[var(--color-obsidian)] text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+    <main className="min-h-screen bg-obsidian text-white">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-14 py-20 lg:py-28">
 
-        {/* ========================================================= */}
         {/* HERO */}
-        {/* ========================================================= */}
-
-        <section className="max-w-5xl mb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="
-              inline-flex
-              items-center
-              gap-2
-              px-3
-              py-1.5
-              rounded-lg
-              bg-blue-500/10
-              border
-              border-blue-500/20
-              text-blue-400
-              text-xs
-              font-mono
-              uppercase
-              tracking-wider
-              mb-7
-            "
-          >
-            <Code2 className="w-4 h-4" />
-            Custom Engineering
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="
-              text-4xl
-              sm:text-5xl
-              lg:text-7xl
-              font-extrabold
-              tracking-tight
-              leading-[1.05]
-            "
-          >
-            Build for Scale.
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400">
-              Engineer for Reliability.
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="
-              mt-7
-              max-w-3xl
-              text-lg
-              sm:text-xl
-              text-slate-400
-              leading-relaxed
-            "
-          >
-            We architect high-performance software platforms, cloud
-            infrastructure, and resilient data systems designed to handle
-            complex workloads, rapid growth, and enterprise-scale demands.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 mt-9"
-          >
-            <a
-              href="/#contact"
-              className="
-                group
-                inline-flex
-                items-center
-                justify-center
-                gap-2
-                px-7
-                py-4
-                rounded-xl
-                bg-blue-600
-                hover:bg-blue-500
-                text-white
-                font-semibold
-                transition-all
-                duration-200
-                shadow-lg
-                shadow-blue-600/20
-                hover:shadow-blue-500/30
-              "
-            >
-              Request Architecture Review
-              <ArrowRight
-                className="
-                  w-4
-                  h-4
-                  transition-transform
-                  duration-200
-                  group-hover:translate-x-1
-                "
-              />
-            </a>
-
-            <a
-              href="#capabilities"
-              className="
-                inline-flex
-                items-center
-                justify-center
-                px-7
-                py-4
-                rounded-xl
-                border
-                border-slate-700
-                hover:border-slate-600
-                hover:bg-white/[0.03]
-                text-slate-300
-                font-semibold
-                transition-all
-              "
-            >
-              Explore Engineering Services
-            </a>
-          </motion.div>
-
-          {/* TRUST POINTS */}
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="
-              flex
-              flex-wrap
-              gap-x-6
-              gap-y-3
-              mt-8
-              text-xs
-              font-mono
-              text-slate-500
-            "
-          >
-            {[
-              'Cloud-Native Architecture',
-              'High-Performance Systems',
-              'Enterprise Security',
-              'Automated Infrastructure',
-            ].map((item) => (
-              <span
-                key={item}
-                className="flex items-center gap-2"
-              >
-                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
-                {item}
-              </span>
-            ))}
-          </motion.div>
-        </section>
-
-        {/* ========================================================= */}
-        {/* CAPABILITIES */}
-        {/* ========================================================= */}
-
-        <section id="capabilities" className="mb-24">
-          <div className="max-w-3xl mb-10">
-            <p className="
-              text-xs
-              font-mono
-              uppercase
-              tracking-widest
-              text-cyan-400
-              mb-3
-            ">
-              Engineering Capabilities
-            </p>
-
-            <h2 className="
-              text-3xl
-              sm:text-4xl
-              font-bold
-              tracking-tight
-            ">
-              Infrastructure engineered around your workload.
-            </h2>
-
-            <p className="
-              mt-4
-              text-slate-400
-              leading-relaxed
-            ">
-              From cloud infrastructure and data architecture to enterprise
-              security, we build the technical foundation required to support
-              reliable digital products at scale.
-            </p>
+        <section className="relative mb-24 grid lg:grid-cols-2 gap-12 items-center overflow-hidden">
+          <div className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
+            <div className="absolute left-0 top-0 h-72 w-72 rounded-full bg-steel/10 blur-[130px]" />
+            <div className="absolute right-1/3 bottom-0 h-64 w-64 rounded-full bg-amber/5 blur-[110px]" />
           </div>
 
-          {/* CAPABILITY CARDS */}
+          <Reveal>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-steel/10 border border-steel/20 text-steelBright text-xs font-mono uppercase tracking-wider mb-7">
+              <Code2 className="w-4 h-4" />
+              Custom Engineering
+            </div>
+
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.05]">
+              Build for Scale.
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-steel via-steelBright to-white">
+                Engineer for Reliability.
+              </span>
+            </h1>
+
+            <p className="mt-7 max-w-xl text-lg text-slate-400 leading-relaxed">
+              We architect high-performance software platforms, cloud infrastructure, and resilient data systems designed to handle complex workloads, rapid growth, and enterprise-scale demands.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 mt-9">
+              <Link
+                href="/#contact"
+                className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-steel hover:bg-steelBright text-onAccentLight font-semibold transition-all shadow-lg shadow-steel/20"
+              >
+                Request Architecture Review
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+
+              <Link
+                href="#capabilities"
+                className="inline-flex items-center justify-center px-7 py-4 rounded-xl border border-slate-700 hover:border-slate-600 hover:bg-white/[0.03] text-slate-300 font-semibold transition-all"
+              >
+                Explore Engineering Services
+              </Link>
+            </div>
+
+            <div className="flex flex-wrap gap-x-6 gap-y-3 mt-8 text-xs font-mono text-slate-500">
+              {['Cloud-Native Architecture', 'High-Performance Systems', 'Enterprise Security', 'Automated Infrastructure'].map((item) => (
+                <span key={item} className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-steelBright" />
+                  {item}
+                </span>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.15} className="flex items-center justify-center">
+            <SignatureOrbit centerIcon={Server} items={ORBIT_ITEMS} size={300} />
+          </Reveal>
+        </section>
+
+        {/* CAPABILITIES */}
+        <section id="capabilities" className="mb-24">
+          <Reveal className="max-w-3xl mb-10">
+            <p className="text-xs font-mono uppercase tracking-widest text-steelBright mb-3">
+              Engineering Capabilities
+            </p>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">
+              Infrastructure engineered around your workload.
+            </h2>
+            <p className="mt-4 text-slate-400 leading-relaxed">
+              From cloud infrastructure and data architecture to enterprise security, we build the technical foundation required to support reliable digital products at scale.
+            </p>
+          </Reveal>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             {capabilities.map((item, index) => {
               const Icon = item.icon;
-
+              const isLast = index === capabilities.length - 1;
               return (
-                <motion.article
-                  key={item.title}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{
-                    once: true,
-                    amount: 0.2,
-                  }}
-                  transition={{
-                    duration: 0.5,
-                    delay: index * 0.1,
-                    ease: 'easeOut',
-                  }}
-                  whileHover={{
-                    y: -8,
-                    transition: {
-                      duration: 0.25,
-                      ease: 'easeOut',
-                    },
-                  }}
-                  className="
-                    group
-                    relative
-                    overflow-hidden
-                    p-7
-                    rounded-2xl
-                    border
-                    border-slate-800
-                    bg-[var(--color-slateGraphite)]/30
-                    transition-all
-                    duration-300
-                    hover:border-blue-500/40
-                    hover:bg-blue-500/[0.03]
-                  "
-                >
-                  {/* TOP GLOW */}
-                  <div
-                    className="
-                      pointer-events-none
-                      absolute
-                      -inset-px
-                      rounded-2xl
-                      opacity-0
-                      group-hover:opacity-100
-                      transition-opacity
-                      duration-500
-                      bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.16),transparent_55%)]
-                    "
-                  />
-
-                  {/* BOTTOM GLOW */}
-                  <div
-                    className="
-                      pointer-events-none
-                      absolute
-                      -bottom-24
-                      left-1/2
-                      -translate-x-1/2
-                      w-48
-                      h-48
-                      rounded-full
-                      bg-blue-500/10
-                      blur-3xl
-                      opacity-0
-                      group-hover:opacity-100
-                      transition-opacity
-                      duration-500
-                    "
-                  />
-
-                  <div className="relative z-10">
-                    {/* ICON */}
-                    <motion.div
-                      whileHover={{
-                        scale: 1.08,
-                        rotate: 2,
-                      }}
-                      transition={{
-                        duration: 0.25,
-                      }}
-                      className="
-                        w-11
-                        h-11
-                        rounded-xl
-                        bg-blue-500/10
-                        border
-                        border-blue-500/20
-                        flex
-                        items-center
-                        justify-center
-                        mb-6
-                        transition-all
-                        duration-300
-                        group-hover:bg-cyan-400/10
-                        group-hover:border-cyan-400/30
-                        group-hover:shadow-[0_0_24px_rgba(34,211,238,0.18)]
-                      "
-                    >
-                      <Icon
-                        className="
-                          w-5
-                          h-5
-                          text-cyan-400
-                          transition-all
-                          duration-300
-                          group-hover:text-cyan-300
-                          group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.7)]
-                        "
-                      />
-                    </motion.div>
-
-                    {/* LABEL */}
-                    <p
-                      className="
-                        text-[10px]
-                        font-mono
-                        uppercase
-                        tracking-widest
-                        text-blue-400
-                        mb-2
-                        transition-colors
-                        duration-300
-                        group-hover:text-cyan-400
-                      "
-                    >
-                      {item.label}
-                    </p>
-
-                    {/* TITLE */}
-                    <h3
-                      className="
-                        text-xl
-                        font-bold
-                        text-white
-                        transition-colors
-                        duration-300
-                        group-hover:text-cyan-50
-                      "
-                    >
-                      {item.title}
-                    </h3>
-
-                    {/* DESCRIPTION */}
-                    <p
-                      className="
-                        text-sm
-                        text-slate-400
-                        leading-relaxed
-                        mt-4
-                        transition-colors
-                        duration-300
-                        group-hover:text-slate-300
-                      "
-                    >
-                      {item.description}
-                    </p>
-
-                    {/* FEATURES */}
-                    <div className="
-                      mt-6
-                      pt-5
-                      border-t
-                      border-slate-800/80
-                      space-y-2.5
-                    ">
+                <Reveal key={item.title} delay={index * 0.08}>
+                  <SpotlightCard
+                    glowColor={isLast ? '#F5920D' : undefined}
+                    className="h-full rounded-2xl border border-slate-800 bg-surface/60 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-steel/40 hover:shadow-lg hover:shadow-steel/10"
+                  >
+                    <GlowIcon icon={Icon} className="mb-6" />
+                    <p className="text-[10px] font-mono uppercase tracking-widest mb-2 text-steelBright">{item.label}</p>
+                    <h3 className="font-display text-xl font-bold text-white">{item.title}</h3>
+                    <p className="text-sm text-slate-400 leading-relaxed mt-4">{item.description}</p>
+                    <div className="mt-6 pt-5 border-t border-slate-800/80 space-y-2.5">
                       {item.features.map((feature) => (
-                        <div
-                          key={feature}
-                          className="
-                            flex
-                            items-center
-                            gap-2.5
-                            text-xs
-                            text-slate-400
-                            transition-colors
-                            duration-300
-                            group-hover:text-slate-300
-                          "
-                        >
-                          <CheckCircle2
-                            className="
-                              w-3.5
-                              h-3.5
-                              text-cyan-400
-                              shrink-0
-                              transition-all
-                              duration-300
-                              group-hover:drop-shadow-[0_0_6px_rgba(34,211,238,0.7)]
-                            "
-                          />
-                          <span>{feature}</span>
+                        <div key={feature} className="flex items-center gap-2.5 text-xs text-slate-300">
+                          <CheckCircle2 className="w-3.5 h-3.5 shrink-0 text-steelBright" />
+                          {feature}
                         </div>
                       ))}
                     </div>
-
-                    {/* EXPLORE */}
-                    <div
-                      className="
-                        flex
-                        items-center
-                        gap-2
-                        mt-7
-                        text-xs
-                        font-semibold
-                        text-slate-500
-                        transition-colors
-                        duration-300
-                        group-hover:text-cyan-400
-                      "
-                    >
-                      <span>Explore capability</span>
-                    </div>
-                  </div>
-                </motion.article>
+                  </SpotlightCard>
+                </Reveal>
               );
             })}
           </div>
         </section>
 
-        {/* ========================================================= */}
         {/* ARCHITECTURE STACK */}
-        {/* ========================================================= */}
-
         <section className="mb-24">
-          <div className="
-            rounded-3xl
-            border
-            border-slate-800
-            bg-[#0B111B]
-            overflow-hidden
-          ">
-            <div className="
-              p-7
-              sm:p-10
-              border-b
-              border-slate-800
-            ">
+          <Reveal className="rounded-3xl border border-slate-800 bg-abyss overflow-hidden">
+            <div className="p-7 sm:p-10 border-b border-slate-800">
               <div className="flex items-start gap-4">
-                <div className="
-                  w-11
-                  h-11
-                  rounded-xl
-                  bg-cyan-500/10
-                  border
-                  border-cyan-500/20
-                  flex
-                  items-center
-                  justify-center
-                  shrink-0
-                ">
-                  <Layers3 className="w-5 h-5 text-cyan-400" />
-                </div>
-
+                <GlowIcon icon={Layers3} />
                 <div>
-                  <p className="
-                    text-xs
-                    font-mono
-                    uppercase
-                    tracking-widest
-                    text-cyan-400
-                  ">
-                    Architecture Stack
-                  </p>
-
-                  <h2 className="
-                    text-2xl
-                    sm:text-3xl
-                    font-bold
-                    mt-2
-                  ">
-                    Every layer engineered to work together.
-                  </h2>
-
-                  <p className="
-                    text-sm
-                    text-slate-400
-                    mt-3
-                    max-w-2xl
-                    leading-relaxed
-                  ">
-                    We approach software architecture as a connected system —
-                    application, infrastructure, data, and security working
-                    together instead of isolated technical components.
+                  <p className="text-xs font-mono uppercase tracking-widest text-steelBright">Architecture Stack</p>
+                  <h2 className="font-display text-2xl sm:text-3xl font-bold mt-2">Every layer engineered to work together.</h2>
+                  <p className="text-sm text-slate-400 mt-3 max-w-2xl leading-relaxed">
+                    We approach software architecture as a connected system — application, infrastructure, data, and security working together instead of isolated technical components.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="
-              grid
-              grid-cols-1
-              sm:grid-cols-2
-              lg:grid-cols-4
-            ">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
               {architectureLayers.map((item, index) => {
                 const Icon = item.icon;
-
+                const isLast = index === architectureLayers.length - 1;
                 return (
-                  <motion.div
+                  <SpotlightCard
                     key={item.title}
-                    initial={{
-                      opacity: 0,
-                      y: 20,
-                    }}
-                    whileInView={{
-                      opacity: 1,
-                      y: 0,
-                    }}
-                    viewport={{
-                      once: true,
-                    }}
-                    transition={{
-                      duration: 0.45,
-                      delay: index * 0.08,
-                    }}
-                    whileHover={{
-                      backgroundColor: 'rgba(59,130,246,0.04)',
-                    }}
-                    className="
-                      relative
-                      p-7
-                      border-b
-                      sm:border-b-0
-                      lg:border-r
-                      last:border-r-0
-                      border-slate-800
-                      transition-all
-                      duration-300
-                    "
+                    glowColor={isLast ? '#F5920D' : undefined}
+                    className="group relative p-7 border-b sm:border-b-0 lg:border-r last:border-r-0 border-slate-800 transition-colors duration-300 hover:bg-steel/[0.04]"
                   >
-                    <div className="
-                      flex
-                      items-center
-                      justify-between
-                      mb-6
-                    ">
-                      <Icon className="w-5 h-5 text-cyan-400" />
-                      <span className="
-                        text-[10px]
-                        font-mono
-                        text-slate-600
-                      ">
-                        0{index + 1}
-                      </span>
+                    <div className="flex items-center justify-between mb-6">
+                      <GlowIcon icon={Icon} size="sm" />
+                      <span className="text-[10px] font-mono text-slate-600">0{index + 1}</span>
                     </div>
-
-                    <h3 className="font-bold text-white">
-                      {item.title}
-                    </h3>
-
-                    <p className="
-                      text-xs
-                      text-slate-500
-                      leading-relaxed
-                      mt-2
-                    ">
-                      {item.description}
-                    </p>
-                  </motion.div>
+                    <h3 className="font-bold text-white transition-colors group-hover:text-steelBright">{item.title}</h3>
+                    <p className="text-xs text-slate-500 leading-relaxed mt-2">{item.description}</p>
+                  </SpotlightCard>
                 );
               })}
             </div>
-          </div>
+          </Reveal>
         </section>
 
-        {/* ========================================================= */}
         {/* ENGINEERING METRICS */}
-        {/* ========================================================= */}
-
         <section className="mb-24">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {engineeringMetrics.map((metric, index) => (
-              <motion.div
-                key={metric.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  duration: 0.45,
-                  delay: index * 0.08,
-                }}
-                whileHover={{ y: -5 }}
-                className="
-                  group
-                  relative
-                  overflow-hidden
-                  p-5
-                  rounded-2xl
-                  border
-                  border-slate-800
-                  bg-[var(--color-slateGraphite)]/30
-                  hover:border-blue-500/30
-                  transition-all
-                  duration-300
-                "
-              >
-                {/* Hover Glow */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    inset-0
-                    opacity-0
-                    group-hover:opacity-100
-                    transition-opacity
-                    duration-500
-                    bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.12),transparent_65%)]
-                  "
-                />
-
-                <div className="relative z-10">
-                  <p
-                    className="
-                      text-2xl
-                      sm:text-3xl
-                      font-bold
-                      font-mono
-                      text-white
-                      transition-colors
-                      duration-300
-                      group-hover:text-cyan-50
-                    "
+            {engineeringMetrics.map((metric, index) => {
+              const isLast = index === engineeringMetrics.length - 1;
+              return (
+                <Reveal key={metric.label} delay={index * 0.08}>
+                  <SpotlightCard
+                    glowColor={isLast ? '#F5920D' : undefined}
+                    className="group relative h-full overflow-hidden p-5 rounded-2xl border border-slate-800 bg-surface/60 hover:border-steel/40 hover:shadow-lg hover:shadow-steel/10 transition-all duration-300 hover:-translate-y-1"
                   >
-                    {metric.value}
-                  </p>
-
-                  <p
-                    className="
-                      text-xs
-                      font-semibold
-                      text-slate-300
-                      mt-2
-                    "
-                  >
-                    {metric.label}
-                  </p>
-
-                  <p
-                    className="
-                      text-[11px]
-                      text-slate-500
-                      mt-1
-                      leading-relaxed
-                    "
-                  >
-                    {metric.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+                    <p className="text-2xl sm:text-3xl font-bold font-mono text-white">{metric.value}</p>
+                    <p className="text-xs font-semibold text-slate-300 mt-2">{metric.label}</p>
+                    <p className="text-[11px] text-slate-500 mt-1 leading-relaxed">{metric.description}</p>
+                  </SpotlightCard>
+                </Reveal>
+              );
+            })}
           </div>
         </section>
 
-        {/* ========================================================= */}
         {/* SECURITY / DELIVERY */}
-        {/* ========================================================= */}
-
         <section className="mb-24">
-          <div className="
-            grid
-            lg:grid-cols-2
-            gap-10
-            items-center
-          ">
-            <div>
-              <p className="
-                text-xs
-                font-mono
-                uppercase
-                tracking-widest
-                text-blue-400
-                mb-3
-              ">
-                Engineering Discipline
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <Reveal>
+              <p className="text-xs font-mono uppercase tracking-widest text-steelBright mb-3">Engineering Discipline</p>
+              <h2 className="font-display text-3xl sm:text-4xl font-bold">Reliability is designed in — not added later.</h2>
+              <p className="mt-5 text-slate-400 leading-relaxed">
+                Our engineering approach considers performance, security, observability, deployment automation, and operational resilience from the beginning of the architecture process.
               </p>
-
-              <h2 className="
-                text-3xl
-                sm:text-4xl
-                font-bold
-              ">
-                Reliability is designed in — not added later.
-              </h2>
-
-              <p className="
-                mt-5
-                text-slate-400
-                leading-relaxed
-              ">
-                Our engineering approach considers performance, security,
-                observability, deployment automation, and operational
-                resilience from the beginning of the architecture process.
-              </p>
-
               <div className="space-y-3 mt-8">
                 {[
                   'Infrastructure as Code',
@@ -824,252 +281,77 @@ export default function CustomEngineeringPage() {
                   'Secrets & access management',
                   'Performance & load optimization',
                 ].map((item) => (
-                  <div
-                    key={item}
-                    className="
-                      flex
-                      items-center
-                      gap-3
-                      text-sm
-                      text-slate-300
-                    "
-                  >
-                    <CheckCircle2 className="
-                      w-4
-                      h-4
-                      text-cyan-400
-                      shrink-0
-                    " />
+                  <div key={item} className="flex items-center gap-3 text-sm text-slate-300">
+                    <CheckCircle2 className="w-4 h-4 text-steelBright shrink-0" />
                     {item}
                   </div>
                 ))}
               </div>
-            </div>
+            </Reveal>
 
-            {/* SECURITY PANEL */}
-            <div className="
-              relative
-              rounded-3xl
-              border
-              border-slate-800
-              bg-[#090E17]
-              p-7
-              sm:p-8
-              overflow-hidden
-            ">
+            <Reveal delay={0.1} className="relative rounded-3xl border border-slate-800 bg-abyss p-7 sm:p-8 overflow-hidden">
               <div className="flex items-center gap-3 mb-6">
-                <div className="
-                  w-11
-                  h-11
-                  rounded-xl
-                  bg-cyan-500/10
-                  border
-                  border-cyan-500/20
-                  flex
-                  items-center
-                  justify-center
-                  shrink-0
-                ">
-                  <Shield className="
-                    w-5
-                    h-5
-                    text-cyan-400
-                  " />
-                </div>
-
+                <GlowIcon icon={Shield} />
                 <div>
-                  <p className="
-                    text-xs
-                    font-mono
-                    text-cyan-400
-                    uppercase
-                    tracking-widest
-                  ">
-                    Security by Design
-                  </p>
-                  <h3 className="
-                    text-lg
-                    font-bold
-                    mt-1
-                  ">
-                    Protected at every layer.
-                  </h3>
+                  <p className="text-xs font-mono text-steelBright uppercase tracking-widest">Security by Design</p>
+                  <h3 className="text-lg font-bold mt-1">Protected at every layer.</h3>
                 </div>
               </div>
 
               <div className="relative space-y-3">
                 {[
-                  {
-                    icon: Lock,
-                    title: 'Identity & Access',
-                    text: 'Controlled access across applications and infrastructure.',
-                  },
-                  {
-                    icon: GitBranch,
-                    title: 'Secure Delivery',
-                    text: 'Security controls integrated into CI/CD workflows.',
-                  },
-                  {
-                    icon: Zap,
-                    title: 'Observability',
-                    text: 'Continuous visibility into application and infrastructure health.',
-                  },
-                ].map((item) => {
+                  { icon: Lock, title: 'Identity & Access', text: 'Controlled access across applications and infrastructure.' },
+                  { icon: GitBranch, title: 'Secure Delivery', text: 'Security controls integrated into CI/CD workflows.' },
+                  { icon: Zap, title: 'Observability', text: 'Continuous visibility into application and infrastructure health.' },
+                ].map((item, index, arr) => {
                   const Icon = item.icon;
-
+                  const isLast = index === arr.length - 1;
                   return (
-                    <div
+                    <SpotlightCard
                       key={item.title}
-                      className="
-                        flex
-                        gap-4
-                        p-4
-                        rounded-xl
-                        border
-                        border-slate-800
-                        bg-[#0D131E]
-                        hover:border-cyan-500/20
-                        transition-all
-                        duration-300
-                      "
+                      glowColor={isLast ? '#F5920D' : undefined}
+                      className="flex gap-4 p-4 rounded-xl border border-slate-800 bg-surface transition-all duration-300 hover:-translate-y-0.5 hover:border-steel/30"
                     >
-                      <Icon className="
-                        w-4
-                        h-4
-                        text-cyan-400
-                        mt-0.5
-                        shrink-0
-                      " />
-
+                      <GlowIcon icon={Icon} size="sm" />
                       <div>
-                        <p className="
-                          text-sm
-                          font-semibold
-                        ">
-                          {item.title}
-                        </p>
-
-                        <p className="
-                          text-xs
-                          text-slate-500
-                          mt-1
-                          leading-relaxed
-                        ">
-                          {item.text}
-                        </p>
+                        <p className="text-sm font-semibold">{item.title}</p>
+                        <p className="text-xs text-slate-500 mt-1 leading-relaxed">{item.text}</p>
                       </div>
-                    </div>
+                    </SpotlightCard>
                   );
                 })}
               </div>
-            </div>
+            </Reveal>
           </div>
         </section>
 
-        {/* ========================================================= */}
         {/* CTA */}
-        {/* ========================================================= */}
+        <Reveal>
+          <section className="relative overflow-hidden rounded-3xl border border-amber/20 bg-gradient-to-br from-amber/10 via-abyss to-steel/10 p-8 sm:p-12">
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-amber/10 blur-[90px] rounded-full" />
 
-        <section className="
-          relative
-          overflow-hidden
-          rounded-3xl
-          border
-          border-blue-500/20
-          bg-gradient-to-br
-          from-blue-900/20
-          via-[#0B111B]
-          to-cyan-900/10
-          p-8
-          sm:p-12
-        ">
-          <div className="
-            absolute
-            -top-24
-            -right-24
-            w-64
-            h-64
-            bg-blue-500/10
-            blur-[90px]
-            rounded-full
-          " />
-
-          <div className="
-            relative
-            flex
-            flex-col
-            lg:flex-row
-            items-start
-            lg:items-center
-            justify-between
-            gap-8
-          ">
-            <div className="max-w-2xl">
-              <div className="
-                flex
-                items-center
-                gap-2
-                text-cyan-400
-                text-xs
-                font-mono
-                uppercase
-                tracking-widest
-                mb-4
-              ">
-                <Code2 className="w-4 h-4" />
-                Architecture Review
+            <div className="relative flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+              <div className="max-w-2xl">
+                <div className="flex items-center gap-2 text-amber text-xs font-mono uppercase tracking-widest mb-4">
+                  <Code2 className="w-4 h-4" />
+                  Architecture Review
+                </div>
+                <h2 className="font-display text-2xl sm:text-3xl font-bold">Have a complex system to build or scale?</h2>
+                <p className="text-slate-400 mt-3 leading-relaxed">
+                  Let&apos;s review your current architecture, technical constraints, scalability requirements, and roadmap — then define the engineering foundation required to move forward.
+                </p>
               </div>
 
-              <h2 className="
-                text-2xl
-                sm:text-3xl
-                font-bold
-              ">
-                Have a complex system to build or scale?
-              </h2>
-
-              <p className="
-                text-slate-400
-                mt-3
-                leading-relaxed
-              ">
-                Let's review your current architecture, technical constraints,
-                scalability requirements, and roadmap — then define the
-                engineering foundation required to move forward.
-              </p>
+              <Link
+                href="/#contact"
+                className="group shrink-0 inline-flex items-center gap-3 px-7 py-4 rounded-xl bg-amber hover:bg-amberBright text-onAccent font-semibold transition-all shadow-lg shadow-amber/20"
+              >
+                Book Architecture Review
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
             </div>
-
-            <a
-              href="/#contact"
-              className="
-                group
-                shrink-0
-                inline-flex
-                items-center
-                gap-3
-                px-7
-                py-4
-                rounded-xl
-                bg-blue-600
-                hover:bg-blue-500
-                text-white
-                font-semibold
-                transition-all
-                shadow-lg
-                shadow-blue-600/20
-              "
-            >
-              Book Architecture Review
-              <ArrowRight className="
-                w-4
-                h-4
-                transition-transform
-                duration-200
-                group-hover:translate-x-1
-              " />
-            </a>
-          </div>
-        </section>
+          </section>
+        </Reveal>
 
       </div>
     </main>

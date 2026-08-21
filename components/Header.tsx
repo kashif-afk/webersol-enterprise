@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
 import { Menu, X, Sparkles } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
 
 const STORY_SECTION_IDS = ['hero-section', 'services', 'process'];
 
@@ -71,7 +72,7 @@ export const Header = () => {
       variants={headerVariants}
       className="relative z-50 w-full backdrop-blur-xl bg-obsidian/80 border-b border-slate-800/85 transition-all"
     >
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-14 h-20 flex items-center justify-between">
 
        {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-3 group">
@@ -99,6 +100,7 @@ export const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+          <Link href="/marketing" className="hover:text-steelBright transition-colors">Marketing</Link>
           <Link href="/#services" className="hover:text-steelBright transition-colors">Services</Link>
           <Link href="/#estimator" className="hover:text-steelBright transition-colors flex items-center gap-1.5">
             <span>ROI Estimator</span>
@@ -108,26 +110,30 @@ export const Header = () => {
         </nav>
 
         {/* Action Button */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
           <Link
             href="/#contact"
-            className="px-5 py-2.5 rounded-xl bg-steel hover:bg-steelBright text-white font-semibold text-sm flex items-center gap-2 transition-all shadow-md shadow-steel/20"
+            className="px-5 py-2.5 rounded-xl bg-steel hover:bg-steelBright text-onAccentLight font-semibold text-sm flex items-center gap-2 transition-all shadow-md shadow-steel/20"
           >
             <Sparkles className="w-4 h-4" />
             <span>Estimate Project</span>
           </Link>
         </div>
 
-        {/* Mobile Hamburger Toggle */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden text-slate-300 hover:text-white p-2"
-          aria-label="Toggle Menu"
-          aria-expanded={mobileMenuOpen}
-          aria-controls="mobile-menu"
-        >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        {/* Mobile: theme toggle + hamburger */}
+        <div className="md:hidden flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="text-slate-300 hover:text-white p-2"
+            aria-label="Toggle Menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Scroll progress indicator */}
@@ -148,13 +154,14 @@ export const Header = () => {
             variants={drawerVariants}
             className="md:hidden bg-obsidian border-b border-slate-800 px-6 py-6 space-y-4 overflow-hidden"
           >
+            <Link href="/marketing" onClick={() => setMobileMenuOpen(false)} className="block text-slate-300 hover:text-steelBright font-medium py-1.5">Marketing</Link>
             <Link href="/#services" onClick={() => setMobileMenuOpen(false)} className="block text-slate-300 hover:text-steelBright font-medium py-1.5">Services</Link>
             <Link href="/#estimator" onClick={() => setMobileMenuOpen(false)} className="block text-slate-300 hover:text-steelBright font-medium py-1.5">ROI Estimator</Link>
             <Link href="/#case-studies" onClick={() => setMobileMenuOpen(false)} className="block text-slate-300 hover:text-steelBright font-medium py-1.5">Case Studies</Link>
             <Link
               href="/#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full mt-4 px-5 py-3 rounded-xl bg-steel text-white font-semibold text-center block"
+              className="w-full mt-4 px-5 py-3 rounded-xl bg-steel text-onAccentLight font-semibold text-center block"
             >
               Estimate Project
             </Link>

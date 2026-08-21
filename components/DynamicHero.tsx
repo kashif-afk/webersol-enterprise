@@ -20,6 +20,8 @@ export const DynamicHero = () => {
   const driftProgress = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   const [canRender3D, setCanRender3D] = useState(false);
+  const [sceneKey, setSceneKey] = useState(0);
+  const contextLossTimestamps = useRef<number[]>([]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -37,12 +39,25 @@ export const DynamicHero = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // If the GPU context is lost mid-session (driver hiccup, resource pressure),
-  // fall back permanently rather than leaving a blank canvas.
-  const handleContextLost = () => setCanRender3D(false);
+  // A lost WebGL context (GPU driver hiccup, resource pressure, a stray readPixels
+  // stall) is usually recoverable — remounting the Canvas creates a fresh context.
+  // Only fall back to the flat CSS glow permanently if it keeps happening, which
+  // signals a genuinely broken GPU/driver rather than a one-off transient loss.
+  const handleContextLost = () => {
+    const now = Date.now();
+    const recent = contextLossTimestamps.current.filter((t) => now - t < 30000);
+    recent.push(now);
+    contextLossTimestamps.current = recent;
+
+    if (recent.length >= 3) {
+      setCanRender3D(false);
+    } else {
+      setSceneKey((k) => k + 1);
+    }
+  };
 
   return (
-    <section id="hero-section" ref={heroRef} className="relative min-h-[90vh] bg-obsidian text-white flex items-center overflow-hidden px-6 lg:px-12 py-20">
+    <section id="hero-section" ref={heroRef} className="relative min-h-[90vh] bg-obsidian text-white flex items-center overflow-hidden px-6 sm:px-8 lg:px-14 py-20">
 
       {/* Ambient lighting glows */}
       <motion.div
@@ -59,7 +74,7 @@ export const DynamicHero = () => {
 
       {/* Vector Constellation Mesh Texture Overlay */}
       <div
-        className="absolute inset-0 opacity-30 pointer-events-none z-0"
+        className="hero-mesh-overlay absolute inset-0 opacity-30 pointer-events-none z-0"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.25' stroke-width='0.75'%3E%3Cpath d='M50 50 L150 30 L220 120 L90 180 Z' /%3E%3Cpath d='M150 30 L320 80 L280 200 L220 120 Z' /%3E%3Cpath d='M320 80 L380 150 L350 280 L280 200 Z' /%3E%3Cpath d='M90 180 L220 120 L180 290 L50 250 Z' /%3E%3Cpath d='M220 120 L280 200 L310 320 L180 290 Z' /%3E%3Cpath d='M280 200 L350 280 L380 380 L310 320 Z' /%3E%3Ccircle cx='50' cy='50' r='2.5' fill='%23ffffff' fill-opacity='0.45'/%3E%3Ccircle cx='150' cy='30' r='2.5' fill='%23ffffff' fill-opacity='0.45'/%3E%3Ccircle cx='220' cy='120' r='3' fill='%23ffffff' fill-opacity='0.55'/%3E%3Ccircle cx='320' cy='80' r='2.5' fill='%23ffffff' fill-opacity='0.45'/%3E%3Ccircle cx='90' cy='180' r='2.5' fill='%23ffffff' fill-opacity='0.45'/%3E%3Ccircle cx='280' cy='200' r='3' fill='%23ffffff' fill-opacity='0.55'/%3E%3Ccircle cx='350' cy='280' r='2.5' fill='%23ffffff' fill-opacity='0.45'/%3E%3Ccircle cx='180' cy='290' r='2.5' fill='%23ffffff' fill-opacity='0.45'/%3E%3Ccircle cx='310' cy='320' r='2.5' fill='%23ffffff' fill-opacity='0.45'/%3E%3C/g%3E%3C/svg%3E")`,
           backgroundRepeat: 'repeat',
@@ -107,7 +122,7 @@ export const DynamicHero = () => {
             >
               <a
                 href="#estimator"
-                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-amber hover:bg-amberBright text-obsidian font-semibold flex items-center justify-center gap-2 transition-all duration-200 shadow-lg shadow-amber/30 hover:shadow-amberBright/50"
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-amber hover:bg-amberBright text-onAccent font-semibold flex items-center justify-center gap-2 transition-all duration-200 shadow-lg shadow-amber/30 hover:shadow-amberBright/50"
               >
                 Launch ROI Estimator
                 <ArrowRight className="w-4 h-4" />
@@ -130,7 +145,7 @@ export const DynamicHero = () => {
           >
             {canRender3D && heroInView ? (
               <Suspense fallback={null}>
-                <HeroScene driftProgress={driftProgress} reduceMotion={!!reduceMotion} onContextLost={handleContextLost} />
+                <HeroScene key={sceneKey} driftProgress={driftProgress} reduceMotion={!!reduceMotion} onContextLost={handleContextLost} />
               </Suspense>
             ) : (
               <div className="absolute inset-0 flex items-center justify-center">
@@ -145,7 +160,7 @@ export const DynamicHero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12 mt-12 border-t border-slate-800/90 max-w-4xl mx-auto lg:mx-0 text-left"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 pt-12 mt-12 border-t border-slate-800/90 max-w-6xl mx-auto lg:mx-0 text-left"
         >
           <div className="p-4 rounded-lg bg-slateGraphite/50 backdrop-blur-md border border-slate-700/60 shadow-xl">
             <p className="text-2xl font-bold font-mono text-white">99.99%</p>
@@ -162,6 +177,10 @@ export const DynamicHero = () => {
           <div className="p-4 rounded-lg bg-slateGraphite/50 backdrop-blur-md border border-slate-700/60 shadow-xl">
             <p className="text-2xl font-bold font-mono text-steelBright">SOC-2</p>
             <p className="text-xs text-slate-400 mt-1">Security Compliant Architecture</p>
+          </div>
+          <div className="p-4 rounded-lg bg-slateGraphite/50 backdrop-blur-md border border-slate-700/60 shadow-xl">
+            <p className="text-2xl font-bold font-mono text-white">2</p>
+            <p className="text-xs text-slate-400 mt-1">Global Delivery Hubs</p>
           </div>
         </motion.div>
       </div>

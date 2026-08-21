@@ -125,7 +125,7 @@ export const InteractiveEstimator = () => {
         <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-amber/5 blur-[120px] rounded-full" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-14">
 
         {/* Header */}
         <Reveal className="max-w-3xl mx-auto text-center mb-14">
@@ -195,7 +195,7 @@ export const InteractiveEstimator = () => {
                     >
                       {active && (
                         <div className={`absolute top-3 right-3 w-5 h-5 rounded-full ${accent.dot} flex items-center justify-center`}>
-                          <Check className="w-3 h-3 text-obsidian" />
+                          <Check className="w-3 h-3 text-onAccent" />
                         </div>
                       )}
 
@@ -498,7 +498,7 @@ export const InteractiveEstimator = () => {
                 {/* CTA */}
                 <a
                   href="#contact"
-                  className="group w-full py-4 px-5 bg-amber hover:bg-amberBright text-obsidian font-semibold rounded-xl flex items-center justify-center gap-3 transition-all shadow-lg shadow-amber/20"
+                  className="group w-full py-4 px-5 bg-amber hover:bg-amberBright text-onAccent font-semibold rounded-xl flex items-center justify-center gap-3 transition-all shadow-lg shadow-amber/20"
                 >
                   <span>Get My Detailed Estimate</span>
 

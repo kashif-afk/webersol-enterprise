@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FloatingAIBot } from "@/components/FloatingAIBot";
+import { noFlashThemeScript } from "@/lib/theme";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -124,6 +125,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: noFlashThemeScript }} />
+      </head>
       <body
         suppressHydrationWarning
         className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} bg-obsidian text-white antialiased flex flex-col min-h-screen relative overflow-x-hidden font-sans`}

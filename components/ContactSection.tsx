@@ -4,12 +4,31 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Mail, Phone, MapPin, ArrowRight, Loader2 } from 'lucide-react';
 import { Reveal } from './motion/Reveal';
 
-export const ContactSection = () => {
+const DEFAULT_SERVICE_OPTIONS = [
+  'Generative AI & Agentic Automation',
+  'Full-Stack Custom Web Architecture',
+  'Financial ERP-Level Architecture',
+  'GEO & Performance Growth Marketing',
+];
+
+type ContactSectionProps = {
+  serviceOptions?: string[];
+  defaultService?: string;
+  heading?: string;
+};
+
+export const ContactSection = ({
+  serviceOptions = DEFAULT_SERVICE_OPTIONS,
+  defaultService,
+  heading = 'Request Architecture Consultation',
+}: ContactSectionProps) => {
+  const initialService = defaultService ?? serviceOptions[0];
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    service: 'Generative AI & Agentic Automation',
+    service: initialService,
     message: '',
     website: '', // honeypot — real users never see or fill this field
   });
@@ -63,7 +82,7 @@ export const ContactSection = () => {
           name: '',
           email: '',
           phone: '',
-          service: 'Generative AI & Agentic Automation',
+          service: initialService,
           message: '',
           website: '',
         });
@@ -80,7 +99,7 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-obsidian/80 backdrop-blur-sm text-white px-6 lg:px-12 border-t border-slate-800/60">
+    <section id="contact" className="py-24 bg-obsidian/80 backdrop-blur-sm text-white px-6 sm:px-8 lg:px-14 border-t border-slate-800/60">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
         {/* Direct Contact Info */}
@@ -122,7 +141,7 @@ export const ContactSection = () => {
 
         {/* Lead Form */}
         <Reveal delay={0.1} className="lg:col-span-7 bg-slateGraphite/25 backdrop-blur-md border border-slate-800 p-8 rounded-2xl space-y-6">
-          <h4 className="font-display text-xl font-bold">Request Architecture Consultation</h4>
+          <h4 className="font-display text-xl font-bold">{heading}</h4>
 
           <form className="space-y-4" onSubmit={handleSubmit}>
             {/* Honeypot — hidden from real visitors, bots tend to fill every field */}
@@ -178,10 +197,11 @@ export const ContactSection = () => {
                   onChange={handleChange}
                   className="w-full bg-obsidian border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-steel"
                 >
-                  <option value="Generative AI & Agentic Automation">Generative AI & Agentic Automation</option>
-                  <option value="Full-Stack Custom Web Architecture">Full-Stack Custom Web Architecture</option>
-                  <option value="Financial ERP-Level Architecture">Financial ERP-Level Architecture</option>
-                  <option value="GEO & Performance Growth Marketing">GEO & Performance Growth Marketing</option>
+                  {serviceOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div>
@@ -227,7 +247,7 @@ export const ContactSection = () => {
             <button
               type="submit"
               disabled={status.loading}
-              className="w-full py-4 bg-amber hover:bg-amberBright disabled:opacity-50 text-obsidian font-semibold rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-amber/25"
+              className="w-full py-4 bg-amber hover:bg-amberBright disabled:opacity-50 text-onAccent font-semibold rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-amber/25"
             >
               {status.loading ? (
                 <>

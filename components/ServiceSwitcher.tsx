@@ -105,7 +105,7 @@ export const ServiceSwitcher = () => {
         <div className="absolute right-0 top-1/2 h-64 w-64 rounded-full bg-amber/5 blur-[100px]" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-6 sm:px-8 lg:px-14">
 
         {/* SECTION HEADER */}
         <Reveal className="mx-auto mb-12 max-w-3xl text-center">

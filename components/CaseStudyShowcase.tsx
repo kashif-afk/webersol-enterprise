@@ -102,7 +102,7 @@ export const CaseStudyShowcase = () => {
   const filteredStudies = filter === 'all' ? caseStudies : caseStudies.filter(study => study.category === filter);
 
   return (
-    <section id="case-studies" className="py-24 bg-obsidian text-white px-6 lg:px-12 border-t border-slate-800/60">
+    <section id="case-studies" className="py-24 bg-obsidian text-white px-6 sm:px-8 lg:px-14 border-t border-slate-800/60">
       <div className="max-w-6xl mx-auto space-y-12">
         <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3 max-w-xl">
@@ -128,7 +128,7 @@ export const CaseStudyShowcase = () => {
                 onClick={() => setFilter(f.id)}
                 aria-pressed={filter === f.id}
                 className={`px-4 py-2 rounded-lg text-xs font-mono transition-all ${
-                  filter === f.id ? 'bg-steel text-white shadow-md shadow-steel/20' : 'text-slate-400 hover:text-white'
+                  filter === f.id ? 'bg-steel text-onAccentLight shadow-md shadow-steel/20' : 'text-slate-400 hover:text-white'
                 }`}
               >
                 {f.label}

@@ -18,7 +18,7 @@ export const TrustedCompanies = () => {
 
   return (
     <section className="py-16 bg-obsidian border-y border-slate-800/80 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 mb-8 text-center">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-14 mb-8 text-center">
         <p className="text-xs font-mono uppercase tracking-widest text-slate-500">
           Trusted by Innovative Engineering Teams & Global Standards
         </p>

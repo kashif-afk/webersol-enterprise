@@ -8,11 +8,11 @@ import { ShieldCheck, Mail, Phone, MapPin } from 'lucide-react';
 export const Footer = () => {
   return (
     <footer className="bg-obsidian border-t border-slate-800 text-slate-400 text-sm">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-14 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10">
         
         {/* Brand Info */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="relative h-14 w-52">
+          <div className="relative h-14 w-52 scale-125 origin-left">
             <Image
               src="/logo.png"
               alt="Webersol Logo"
@@ -35,6 +35,7 @@ export const Footer = () => {
         <div className="space-y-3">
           <h4 className="text-white font-semibold text-xs font-mono uppercase tracking-wider">Capabilities</h4>
           <ul className="space-y-2.5 text-sm">
+            <li><Link href="/marketing" className="hover:text-steelBright transition-colors">Marketing Services</Link></li>
             <li><Link href="/services/ai-automation" className="hover:text-steelBright transition-colors">Generative AI Agents</Link></li>
             <li><Link href="/services/custom-engineering" className="hover:text-steelBright transition-colors">Cloud Architecture</Link></li>
             <li><Link href="/services/financial-erp" className="hover:text-steelBright transition-colors">Financial ERP Systems</Link></li>
@@ -48,7 +49,17 @@ export const Footer = () => {
           <ul className="space-y-2.5 text-sm">
             <li><Link href="/#estimator" className="hover:text-steelBright transition-colors">ROI Estimator</Link></li>
             <li><Link href="/#case-studies" className="hover:text-steelBright transition-colors">Case Studies</Link></li>
+            <li><Link href="/blog" className="hover:text-steelBright transition-colors">Blog</Link></li>
             <li><Link href="/#contact" className="hover:text-steelBright transition-colors">Strategy Call</Link></li>
+          </ul>
+        </div>
+
+        {/* Company */}
+        <div className="space-y-3">
+          <h4 className="text-white font-semibold text-xs font-mono uppercase tracking-wider">Company</h4>
+          <ul className="space-y-2.5 text-sm">
+            <li><Link href="/about" className="hover:text-steelBright transition-colors">About Us</Link></li>
+            <li><Link href="/careers" className="hover:text-steelBright transition-colors">Careers</Link></li>
           </ul>
         </div>
 
@@ -121,7 +132,7 @@ export const Footer = () => {
 
       </div>
 
-      <div className="border-t border-slate-800/80 py-6 px-6 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 font-mono">
+      <div className="border-t border-slate-800/80 py-6 px-6 sm:px-8 lg:px-14 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 font-mono">
         <p>© 2026 Webersol Enterprise IT Solutions. All rights reserved.</p>
         <p className="mt-2 md:mt-0">Core Web Vitals Engine | Next.js App Router</p>
       </div>

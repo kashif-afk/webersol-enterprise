@@ -124,7 +124,7 @@ export const SDLCDiagram = () => {
         <div className="absolute right-1/4 bottom-0 h-64 w-64 rounded-full bg-amber/5 blur-[110px]" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-6 sm:px-8 lg:px-14">
         <Reveal className="mx-auto mb-14 max-w-3xl text-center">
           <div className="mb-5 inline-flex items-center gap-2 rounded-lg border border-steel/20 bg-steel/10 px-3 py-1.5 text-xs font-mono uppercase tracking-wider text-steelBright">
             <span>Engineering Process</span>

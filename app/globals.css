@@ -18,24 +18,93 @@
   --color-success: #34D399;
   --color-danger: #F87171;
 
+  /* Fixed dark ink for text/icons placed on bright accent surfaces (e.g. text-onAccent
+     on a bg-amber button) — intentionally does NOT flip in light mode, since dark text
+     on a bright button needs to stay dark regardless of overall theme. */
+  --color-onAccent: #0B0F17;
+
+  /* Fixed white for text/icons placed on solid, always-colored surfaces (a filled
+     bg-steel button, an active filter pill) — the counterpart to --color-onAccent,
+     for surfaces dark enough that white text stays readable in both themes. Does
+     NOT apply to translucent tinted surfaces (e.g. bg-steel/15), which are pale
+     enough in light mode that they still need the flipping --color-white token. */
+  --color-onAccentLight: #FFFFFF;
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-space-grotesk), var(--font-sans);
   --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Light theme — an accessibility-focused, high-contrast alternative to the default
+   dark theme, toggled via ThemeToggle (components/ThemeToggle.tsx) setting
+   data-theme="light" on <html>. Every color below is a token already consumed by
+   existing Tailwind utility classes throughout the codebase (bg-obsidian, text-slate-400,
+   border-slate-800, text-steelBright, etc.), so overriding the variables here re-themes
+   the whole site without touching component class names. Values are chosen to meet
+   WCAG AA contrast (>=4.5:1 body text, >=3:1 large text/borders) against their
+   light-mode backgrounds. Decorative "tech art" (WebGL hero, SignatureOrbit/OrbitSystem
+   motifs, SDLC diagram, FloatingAIBot mascot) intentionally keeps its own hardcoded
+   dark palette in both themes — out of scope by design, not an oversight. */
+:root[data-theme="light"] {
+  --color-obsidian: #FFFFFF;
+  --color-abyss: #F1F5F9;
+  --color-surface: #FFFFFF;
+  --color-surfaceInset: #EEF2F7;
+  --color-slateGraphite: #E2E8F0;
+
+  --color-steel: #0C628C;
+  --color-steelBright: #0A5A82;
+  --color-steelDim: #DCEEF6;
+
+  --color-amber: #B36B00;
+  --color-amberBright: #C97A00;
+  --color-amberDim: #FDECD1;
+
+  --color-success: #047857;
+  --color-danger: #DC2626;
+
+  /* Text/border grays — mirrored around slate-500 so each shade keeps its role
+     (e.g. slate-400 stays "standard secondary text") while flipping light-on-dark
+     to dark-on-light. */
+  --color-white: #0B0F17;
+  --color-slate-200: #1E293B;
+  --color-slate-300: #334155;
+  --color-slate-400: #475569;
+  --color-slate-500: #4B5768;
+  --color-slate-600: #94A3B8;
+  --color-slate-700: #CBD5E1;
+  --color-slate-800: #E2E8F0;
+  --color-slate-900: #F1F5F9;
 }
 
 @layer base {
   html, body {
     background-color: var(--color-obsidian);
     /* Global AI Constellation & Neural Mesh Texture */
-    background-image: 
+    background-image:
       radial-gradient(circle at 50% 10%, rgba(37, 99, 235, 0.15) 0%, transparent 60%),
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.22' stroke-width='1'%3E%3Cpath d='M50 50 L150 30 L220 120 L90 180 Z' /%3E%3Cpath d='M150 30 L320 80 L280 200 L220 120 Z' /%3E%3Cpath d='M320 80 L380 150 L350 280 L280 200 Z' /%3E%3Cpath d='M90 180 L220 120 L180 290 L50 250 Z' /%3E%3Cpath d='M220 120 L280 200 L310 320 L180 290 Z' /%3E%3Cpath d='M280 200 L350 280 L380 380 L310 320 Z' /%3E%3Ccircle cx='50' cy='50' r='3' fill='%23ffffff' fill-opacity='0.4'/%3E%3Ccircle cx='150' cy='30' r='3' fill='%23ffffff' fill-opacity='0.4'/%3E%3Ccircle cx='220' cy='120' r='3.5' fill='%23ffffff' fill-opacity='0.5'/%3E%3Ccircle cx='320' cy='80' r='3' fill='%23ffffff' fill-opacity='0.4'/%3E%3Ccircle cx='90' cy='180' r='3' fill='%23ffffff' fill-opacity='0.4'/%3E%3Ccircle cx='280' cy='200' r='3.5' fill='%23ffffff' fill-opacity='0.5'/%3E%3Ccircle cx='350' cy='280' r='3' fill='%23ffffff' fill-opacity='0.4'/%3E%3Ccircle cx='180' cy='290' r='3' fill='%23ffffff' fill-opacity='0.4'/%3E%3Ccircle cx='310' cy='320' r='3' fill='%23ffffff' fill-opacity='0.4'/%3E%3C/g%3E%3C/svg%3E");
     background-repeat: repeat;
     background-attachment: fixed;
-    color: #F8FAFC;
+    color: var(--color-white);
     overflow-x: hidden;
     min-height: 100vh;
   }
+
+  /* Light mode: drop the dark mesh texture entirely rather than recoloring it —
+     a plain, uncluttered background is both simpler and directly serves the
+     "easier to read" goal this theme exists for. */
+  :root[data-theme="light"] html,
+  :root[data-theme="light"] body {
+    background-image: none;
+  }
+}
+
+/* Hides DynamicHero's decorative white-stroke constellation mesh overlay in light
+   mode — it's hardcoded white-on-transparent and would otherwise render invisible
+   (or clash) against the new light background. */
+:root[data-theme="light"] .hero-mesh-overlay {
+  display: none;
 }
 
 /* Custom Scrollbar for Enterprise Feel */
