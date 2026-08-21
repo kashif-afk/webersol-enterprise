@@ -1,10 +1,10 @@
 import { renderOgImage, ogImageSize } from '@/lib/ogImage';
 
 export const dynamic = 'force-static';
-export const alt = 'Webersol — AI Automation & Software Engineering';
+export const alt = 'Blog | Webersol';
 export const size = ogImageSize;
 export const contentType = 'image/png';
 
 export default function Image() {
-  return renderOgImage('Architecting Autonomous AI & Enterprise Web Infrastructure');
+  return renderOgImage('Engineering, AI, and Growth, Explained');
 }

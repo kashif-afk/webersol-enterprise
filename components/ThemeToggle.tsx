@@ -13,9 +13,14 @@ export const ThemeToggle = ({ className = '' }: { className?: string }) => {
   // icon match the real theme without a server/client hydration mismatch.
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
-    const current = document.documentElement.getAttribute('data-theme');
-    setTheme(current === 'light' ? 'light' : 'dark');
+    const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    setTheme(current);
     setMounted(true);
+
+    const color = current === 'light' ? '#FFFFFF' : '#0B0F17';
+    document.querySelectorAll('meta[name="theme-color"]').forEach((el) => {
+      el.setAttribute('content', color);
+    });
   }, []);
   /* eslint-enable react-hooks/set-state-in-effect */
 
@@ -28,6 +33,13 @@ export const ThemeToggle = ({ className = '' }: { className?: string }) => {
     } catch {
       // localStorage unavailable (private browsing, etc.) — theme just won't persist
     }
+
+    // Next.js renders one theme-color <meta> per prefers-color-scheme media query.
+    // A manual toggle should win over OS preference, so force both to the chosen theme.
+    const color = next === 'light' ? '#FFFFFF' : '#0B0F17';
+    document.querySelectorAll('meta[name="theme-color"]').forEach((el) => {
+      el.setAttribute('content', color);
+    });
   };
 
   // Avoid rendering an icon that might not match the script-applied theme
