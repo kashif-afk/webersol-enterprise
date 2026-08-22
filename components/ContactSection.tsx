@@ -9,6 +9,7 @@ const DEFAULT_SERVICE_OPTIONS = [
   'Full-Stack Custom Web Architecture',
   'Financial ERP-Level Architecture',
   'GEO & Performance Growth Marketing',
+  'Marketing',
 ];
 
 type ContactSectionProps = {

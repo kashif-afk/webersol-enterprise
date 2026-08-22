@@ -2,25 +2,316 @@
 
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Shield, Cloud } from 'lucide-react';
-import { siOdoo, siVercel, siGooglecloud, siNextdotjs } from 'simple-icons';
-
-// Renders a simple-icons brand mark as a monochrome SVG (fill="currentColor"),
-// matching the lucide icons it sits alongside — never the brand's own color,
-// per the "no colored logo" requirement for this slider.
-const BrandMark = ({ path }: { path: string }) => (
-  <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden="true">
-    <path d={path} />
-  </svg>
-);
 
 const partners = [
-  { name: 'Odoo Enterprise', icon: <BrandMark path={siOdoo.path} />, badge: 'Official Partner' },
-  { name: 'AWS Cloud', icon: <Cloud className="w-4 h-4" />, badge: 'Advanced Tier' },
-  { name: 'Vercel Infrastructure', icon: <BrandMark path={siVercel.path} />, badge: 'Edge Network' },
-  { name: 'Google Cloud AI', icon: <BrandMark path={siGooglecloud.path} />, badge: 'LLM Integrator' },
-  { name: 'Next.js Ecosystem', icon: <BrandMark path={siNextdotjs.path} />, badge: 'Core Stack' },
-  { name: 'SOC2 Security', icon: <Shield className="w-4 h-4" />, badge: 'Type II Compliant' },
+  {
+    name: 'Sadaf Amir',
+    icon: (
+      <img
+        src="/logos/sadaf-amir.svg"
+        alt="Sadaf Amir logo"
+        className="h-4 w-auto invert"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Expert Care',
+    icon: (
+      <img
+        src="/logos/expert-care.svg"
+        alt="Expert Care logo"
+        className="h-6 w-auto"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Luxurious Design & Build',
+    icon: (
+      <img
+        src="/logos/luxurious-design-build.png"
+        alt="Luxurious Design & Build logo"
+        className="h-9 w-auto rounded object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'GlamX Beauty',
+    icon: (
+      <img
+        src="/logos/glamx-beauty.png"
+        alt="GlamX Beauty logo"
+        className="h-8 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Zee Frozen Cuisine',
+    icon: (
+      <img
+        src="/logos/zee-frozen-cuisine.png"
+        alt="Zee Frozen Cuisine logo"
+        className="h-9 w-auto rounded-full object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Neon Energies',
+    icon: (
+      <img
+        src="/logos/neon-energies.png"
+        alt="Neon Energies logo"
+        className="h-8 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Coarix Leather',
+    icon: (
+      <img
+        src="/logos/coarix-leather.png"
+        alt="Coarix Leather logo"
+        className="h-8 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Deewan Foods',
+    icon: (
+      <img
+        src="/logos/deewan-foods.png"
+        alt="Deewan Foods logo"
+        className="h-9 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Dar-e-Arqam Schools',
+    icon: (
+      <img
+        src="/logos/dar-e-arqam-schools.png"
+        alt="Dar-e-Arqam Schools logo"
+        className="h-9 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Pacific Packagings',
+    icon: (
+      <img
+        src="/logos/pacific-packagings.webp"
+        alt="Pacific Packagings logo"
+        className="h-8 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Bloomsford Middle East',
+    icon: (
+      <img
+        src="/logos/bloomsford-middle-east.png"
+        alt="Bloomsford Middle East logo"
+        className="h-9 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: "Cakes & Bakes",
+    icon: (
+      <img
+        src="/logos/cakes-and-bakes.jpg"
+        alt="Cakes & Bakes logo"
+        className="h-8 w-auto rounded object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Middlebury Dental Center',
+    icon: (
+      <img
+        src="/logos/middlebury-dental-center.png"
+        alt="Middlebury Dental Center logo"
+        className="h-8 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'National Credit Direct',
+    icon: (
+      <img
+        src="/logos/national-credit-direct.png"
+        alt="National Credit Direct logo"
+        className="h-8 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: "P.F. Chang's",
+    icon: (
+      <img
+        src="/logos/pf-changs.png"
+        alt="P.F. Chang's logo"
+        className="h-6 w-auto rounded object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Taaq',
+    icon: (
+      <img
+        src="/logos/taaq.webp"
+        alt="Taaq logo"
+        className="h-9 w-auto rounded object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Tik Tik Technical Services',
+    icon: (
+      <img
+        src="/logos/tik-tik-technical-services.png"
+        alt="Tik Tik Technical Services logo"
+        className="h-9 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Zee Foods',
+    icon: (
+      <img
+        src="/logos/zee-foods.png"
+        alt="Zee Foods logo"
+        className="h-9 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Ascott',
+    icon: (
+      <img
+        src="/logos/ascott.png"
+        alt="Ascott logo"
+        className="h-9 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Berjaya Hotels & Resorts',
+    icon: (
+      <img
+        src="/logos/berjaya-hotels-resorts.png"
+        alt="Berjaya Hotels & Resorts logo"
+        className="h-9 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Millennium Hotels & Resorts',
+    icon: (
+      <img
+        src="/logos/millennium-hotels-resorts.png"
+        alt="Millennium Hotels & Resorts logo"
+        className="h-9 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Dorsett Hotels & Resorts',
+    icon: (
+      <img
+        src="/logos/dorsett-hotels-resorts.png"
+        alt="Dorsett Hotels & Resorts logo"
+        className="h-9 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Lexis Hotel Group',
+    icon: (
+      <img
+        src="/logos/lexis-hotel-group.png"
+        alt="Lexis Hotel Group logo"
+        className="h-9 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Mercure Hotels',
+    icon: (
+      <img
+        src="/logos/mercure-hotels.png"
+        alt="Mercure Hotels logo"
+        className="h-9 w-auto rounded object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Gypto Pharma',
+    icon: (
+      <img
+        src="/logos/gypto-pharma.png"
+        alt="Gypto Pharma logo"
+        className="h-9 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Destinations Connect',
+    icon: (
+      <img
+        src="/logos/destinations-connect.png"
+        alt="Destinations Connect logo"
+        className="h-8 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Texas LED Signage',
+    icon: (
+      <img
+        src="/logos/texas-led-signage.png"
+        alt="Texas LED Signage logo"
+        className="h-9 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
+  {
+    name: 'Universal Holidays',
+    icon: (
+      <img
+        src="/logos/universal-holidays.png"
+        alt="Universal Holidays logo"
+        className="h-9 w-auto bg-white rounded p-1 object-contain"
+      />
+    ),
+    badge: 'Valued Client',
+  },
 ];
 
 export const TrustedCompanies = () => {
@@ -42,11 +333,16 @@ export const TrustedCompanies = () => {
         <motion.div
           className="flex gap-8 shrink-0 items-center min-w-full"
           animate={reduceMotion ? { x: '0%' } : { x: ['0%', '-50%'] }}
-          transition={reduceMotion ? { duration: 0 } : { repeat: Infinity, duration: 25, ease: 'linear' }}
+          transition={reduceMotion ? { duration: 0 } : { repeat: Infinity, duration: 180, ease: 'linear' }}
         >
-          {/* Duplicate array to create a seamless infinite loop; second half is decorative for screen readers */}
-          {[...partners, ...partners].map((partner, index) => {
-            const isDuplicate = index >= partners.length;
+          {/* Repeat the set enough times to fill both halves at any viewport width, then duplicate
+              that filled sequence once for a seamless loop; everything past the first repeat is
+              decorative for screen readers */}
+          {(() => {
+            const repeated = Array(3).fill(partners).flat();
+            return [...repeated, ...repeated];
+          })().map((partner, index) => {
+            const isDuplicate = index >= 3 * partners.length;
             return (
               <div
                 key={index}
