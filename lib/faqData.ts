@@ -2,38 +2,60 @@ export type FaqTopic = {
   id: string;
   label: string;
   answer: string;
+  link?: { href: string; label: string };
   followUps?: string[];
 };
 
-// Content mirrors what's already on the homepage (ServiceSwitcher, InteractiveEstimator,
-// Footer) — no facts invented here, just summarized for a chat format.
+// Content mirrors what's already on the site (About, Services, Marketing pages) —
+// no facts invented here, just summarized for a chat format. Every service topic
+// carries a link back to its full page so the bot can redirect instead of guessing.
 export const FAQ_TOPICS: Record<string, FaqTopic> = {
-  services: {
-    id: 'services',
-    label: 'What do you do?',
+  about: {
+    id: 'about',
+    label: 'About us',
     answer:
-      "We're a software engineering house working across four verticals: Generative AI & enterprise automation, full-stack custom software & cloud architecture, financial ERP-level systems, and performance/GEO growth marketing.",
-    followUps: ['cost', 'timeline', 'contact'],
+      "Webersol is an enterprise engineering house — we build generative AI systems, custom software & cloud architecture, financial ERP platforms, and performance growth marketing for teams that need production-grade work. Here's everything we offer:",
+    followUps: ['ai-automation', 'custom-engineering', 'financial-erp', 'performance-growth', 'marketing', 'contact'],
   },
-  cost: {
-    id: 'cost',
-    label: 'How much does a project cost?',
+  'ai-automation': {
+    id: 'ai-automation',
+    label: 'AI & Automation',
     answer:
-      "It depends on scope — our ROI estimator gives you an indicative investment range in seconds based on your architecture tier, AI/cloud requirements, and timeline.",
-    followUps: ['estimator', 'timeline', 'contact'],
+      'We build custom LLM & RAG systems, AI-powered QA with self-healing automation, and autonomous process agents that reason, orchestrate, and act across your enterprise systems.',
+    link: { href: '/services/ai-automation', label: 'View AI & Automation services' },
+    followUps: ['contact', 'about'],
   },
-  estimator: {
-    id: 'estimator',
-    label: 'Open the ROI estimator',
+  'custom-engineering': {
+    id: 'custom-engineering',
+    label: 'Custom Engineering',
     answer:
-      "Scrolling you to the estimator now — configure your requirements and you'll get a live investment range and delivery estimate.",
+      'Full-stack custom software and cloud architecture — scalable platforms, APIs, and infrastructure engineered for reliability at enterprise scale.',
+    link: { href: '/services/custom-engineering', label: 'View Custom Engineering services' },
+    followUps: ['contact', 'about'],
   },
-  timeline: {
-    id: 'timeline',
-    label: 'How long do projects take?',
+  'financial-erp': {
+    id: 'financial-erp',
+    label: 'Financial ERP',
     answer:
-      'Typical delivery windows run 4 to 16 weeks depending on scope — focused MVPs land faster, enterprise AI/ERP builds take longer for the same reason they need more engineering depth.',
-    followUps: ['cost', 'contact'],
+      'Financial ERP-level systems — immutable ledgers, multi-currency reconciliation, and audit-ready accounting engines built for zero-drift accuracy.',
+    link: { href: '/services/financial-erp', label: 'View Financial ERP services' },
+    followUps: ['contact', 'about'],
+  },
+  'performance-growth': {
+    id: 'performance-growth',
+    label: 'Performance & Growth',
+    answer:
+      'AI search visibility and GEO, structured data, and performance marketing systems that grow organic and paid reach across traditional and generative search.',
+    link: { href: '/services/performance-growth', label: 'View Performance & Growth services' },
+    followUps: ['contact', 'about'],
+  },
+  marketing: {
+    id: 'marketing',
+    label: 'Marketing',
+    answer:
+      'Full-service marketing: SEO & GEO, PPC, social media, LinkedIn marketing, content, email, influencer, video, marketing automation, and conversion rate optimization.',
+    link: { href: '/marketing', label: 'View Marketing services' },
+    followUps: ['contact', 'about'],
   },
   contact: {
     id: 'contact',
@@ -43,7 +65,7 @@ export const FAQ_TOPICS: Record<string, FaqTopic> = {
   },
 };
 
-export const FAQ_ROOT_TOPICS = ['services', 'cost', 'timeline', 'contact'];
+export const FAQ_ROOT_TOPICS = ['about'];
 
 export const GREETING =
-  "Hi, I'm the Webersol assistant. I can answer a few quick questions about what we do, pricing, and timelines — or connect you with the team.";
+  "Hi, I'm the Webersol assistant. I can tell you about us or what we do — or connect you with the team.";

@@ -140,7 +140,38 @@ export const SDLCDiagram = () => {
           </p>
         </Reveal>
 
-        <Reveal delay={0.1}>
+        {/* Compact stacked layout for narrow screens — the circular diagram's fixed-size
+            icons/labels overlap once the SVG scales below its natural aspect. */}
+        <Reveal delay={0.1} className="sm:hidden">
+          <ol className="space-y-3">
+            {STAGES.map((stage, i) => {
+              const Icon = stage.icon;
+              return (
+                <li
+                  key={stage.id}
+                  className="flex items-center gap-3 rounded-xl border border-slate-800 bg-surface p-3"
+                >
+                  <div
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2"
+                    style={{ borderColor: stage.color, backgroundColor: '#101724', boxShadow: `0 0 14px ${stage.color}66` }}
+                  >
+                    <Icon className="h-4.5 w-4.5" style={{ color: stage.color }} />
+                  </div>
+                  <div>
+                    <p className="font-display text-sm font-bold text-white">
+                      {String(i + 1).padStart(2, '0')}. {stage.title}
+                    </p>
+                    <p className="font-mono text-[10px] uppercase tracking-wide text-slate-500">
+                      {stage.tags[0]}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </Reveal>
+
+        <Reveal delay={0.1} className="hidden sm:block">
           <div className="relative mx-auto w-full" style={{ maxWidth: VB_W, aspectRatio: `${VB_W} / ${VB_H}` }}>
             <svg viewBox={`0 0 ${VB_W} ${VB_H}`} className="absolute inset-0 h-full w-full overflow-visible">
               <defs>

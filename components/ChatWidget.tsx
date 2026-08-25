@@ -2,7 +2,8 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { X, Send, MessageSquare } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight, X, Send, MessageSquare } from 'lucide-react';
 import { FAQ_TOPICS, FAQ_ROOT_TOPICS, GREETING, FaqTopic } from '@/lib/faqData';
 
 type ChatMessage = {
@@ -10,6 +11,7 @@ type ChatMessage = {
   sender: 'bot' | 'user';
   text: string;
   quickReplies?: string[];
+  link?: { href: string; label: string };
 };
 
 type ChatWidgetProps = {
@@ -90,7 +92,7 @@ export const ChatWidget = ({ open, onClose, triggerRef }: ChatWidgetProps) => {
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,
-        { id: nextId(), sender: 'bot', text: topic.answer, quickReplies: topic.followUps },
+        { id: nextId(), sender: 'bot', text: topic.answer, quickReplies: topic.followUps, link: topic.link },
       ]);
       setTyping(false);
 
@@ -171,7 +173,17 @@ export const ChatWidget = ({ open, onClose, triggerRef }: ChatWidgetProps) => {
                         : 'bg-amber/15 border border-amber/30 text-amber rounded-br-sm'
                     }`}
                   >
-                    {m.text}
+                    <p>{m.text}</p>
+                    {m.link && (
+                      <Link
+                        href={m.link.href}
+                        onClick={onClose}
+                        className="mt-2 inline-flex items-center gap-1.5 text-steelBright hover:text-white font-semibold transition-colors"
+                      >
+                        {m.link.label}
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    )}
                   </div>
                 </div>
               ))}

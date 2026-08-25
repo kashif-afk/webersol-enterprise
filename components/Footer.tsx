@@ -12,12 +12,12 @@ export const Footer = () => {
         
         {/* Brand Info */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="relative h-14 w-52 scale-125 origin-left">
+          <div className="relative h-28 w-28 origin-left">
             <Image
               src="/logo.png"
               alt="Webersol Logo"
               fill
-              sizes="(max-width: 768px) 208px, 208px"
+              sizes="112px"
               priority
               className="object-contain object-left"
             />

@@ -72,17 +72,17 @@ export const Header = () => {
       variants={headerVariants}
       className="relative z-50 w-full backdrop-blur-xl bg-obsidian/80 border-b border-slate-800/85 transition-all"
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-14 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-14 h-28 sm:h-32 flex items-center justify-between">
 
        {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative h-19 w-52 sm:w-65 ">
+          <div className="relative h-28 w-28 sm:h-32 sm:w-32">
             <Image
               src="/logo.png"
               alt="Webersol Logo"
               fill
               className="object-contain object-left"
-              sizes="(max-width: 640px) 192px, 240px"
+              sizes="(max-width: 640px) 112px, 128px"
               priority
             />
           </div>
