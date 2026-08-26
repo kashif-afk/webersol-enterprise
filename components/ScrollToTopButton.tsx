@@ -2,18 +2,43 @@
 
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import { ChevronUp } from 'lucide-react';
+
+const SHOW_AFTER_PX = 480;
+
+const getScrollY = () =>
+  window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
 
 export const ScrollToTopButton = () => {
   const reduceMotion = useReducedMotion();
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 480);
-    onScroll();
+    let ticking = false;
+
+    const checkScroll = () => {
+      setVisible(getScrollY() > SHOW_AFTER_PX);
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(checkScroll);
+    };
+
+    checkScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Client-side route changes don't always fire a 'scroll' event even though
+  // the new page starts back at the top — re-check explicitly on navigation.
+  useEffect(() => {
+    setVisible(getScrollY() > SHOW_AFTER_PX);
+  }, [pathname]);
 
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
