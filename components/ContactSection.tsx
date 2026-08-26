@@ -114,21 +114,29 @@ export const ContactSection = ({
           </div>
 
           <div className="space-y-4 text-sm font-mono">
-            <div className="flex items-center gap-3 p-4 bg-slateGraphite/40 border border-slate-800 rounded-xl">
+            <a
+              href="mailto:info@webersol.com"
+              className="flex items-center gap-3 p-4 bg-slateGraphite/40 border border-slate-800 rounded-xl hover:border-steel/60 transition-colors"
+            >
               <Mail className="w-5 h-5 text-steelBright shrink-0" />
               <div>
                 <p className="text-xs text-slate-400">Direct Email</p>
                 <p className="text-white font-bold">info@webersol.com</p>
               </div>
-            </div>
+            </a>
 
-            <div className="flex items-center gap-3 p-4 bg-slateGraphite/40 border border-slate-800 rounded-xl">
+            <a
+              href="https://wa.me/18722843026"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 bg-slateGraphite/40 border border-slate-800 rounded-xl hover:border-steel/60 transition-colors"
+            >
               <Phone className="w-5 h-5 text-steel shrink-0" />
               <div>
                 <p className="text-xs text-slate-400">Direct Line / WhatsApp</p>
                 <p className="text-white font-bold">+1 872 284 3026</p>
               </div>
-            </div>
+            </a>
 
             <div className="flex items-center gap-3 p-4 bg-slateGraphite/40 border border-slate-800 rounded-xl">
               <MapPin className="w-5 h-5 text-steel shrink-0" />
