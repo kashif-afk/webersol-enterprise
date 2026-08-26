@@ -95,6 +95,42 @@ const caseStudies = [
     tags: ['TypeScript', 'Node.js', 'PostgreSQL', 'AWS'],
     cta: 'Explore Case Study',
   },
+  {
+    id: 6,
+    client: 'D2C Consumer Brand',
+    category: 'marketing',
+    categoryLabel: 'Marketing',
+    metric: '3.1×',
+    metricLabel: 'ROAS Improvement',
+    title: 'Full-Funnel Paid Media & Lifecycle Marketing System',
+    description:
+      'Rebuilt attribution and audience targeting across paid social and video, pairing YouTube, TikTok, and LinkedIn campaigns with unified cross-platform reporting to lift return on ad spend while cutting customer acquisition cost.',
+    impact: [
+      '3.1× return on ad spend',
+      '38% lower customer acquisition cost',
+      'Automated multi-channel attribution',
+    ],
+    tags: ['Meta Ads', 'GA4', 'YouTube', 'TikTok', 'LinkedIn', 'ChatGPT Ads'],
+    cta: 'Explore Case Study',
+  },
+  {
+    id: 7,
+    client: 'B2B SaaS Growth Team',
+    category: 'marketing',
+    categoryLabel: 'Marketing',
+    metric: '2.8×',
+    metricLabel: 'Pipeline Growth',
+    title: 'Demand Generation & Marketing Automation Overhaul',
+    description:
+      'Designed a lead-scoring and nurture engine integrated with the CRM, aligning content and campaign workflows to accelerate pipeline velocity and improve marketing-to-sales handoff quality.',
+    impact: [
+      '2.8× qualified pipeline growth',
+      '45% shorter lead response time',
+      'Unified CRM and campaign reporting',
+    ],
+    tags: ['HubSpot', 'Salesforce', 'Segment', 'Marketing Automation'],
+    cta: 'Explore Case Study',
+  },
 ];
 
 export const CaseStudyShowcase = () => {
@@ -122,6 +158,7 @@ export const CaseStudyShowcase = () => {
               { id: 'ai-automation', label: 'AI & Automation' },
               { id: 'custom-engineering', label: 'Engineering' },
               { id: 'performance-growth', label: 'Growth' },
+              { id: 'marketing', label: 'Marketing' },
             ].map((f) => (
               <button
                 key={f.id}

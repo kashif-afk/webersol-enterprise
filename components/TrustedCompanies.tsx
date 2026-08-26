@@ -173,9 +173,9 @@ const partners = [
     name: 'Taaq',
     icon: (
       <img
-        src="/logos/taaq.webp"
+        src="/logos/taaq.png"
         alt="Taaq logo"
-        className="h-9 w-auto rounded object-contain"
+        className="h-10 w-auto bg-white rounded p-1 object-contain"
       />
     ),
     badge: 'Valued Client',

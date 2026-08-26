@@ -25,7 +25,6 @@ export const DynamicHero = () => {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    if (window.innerWidth < 768) return; // keep the lighter fallback on mobile — WebGL is expensive there
 
     const timer = setTimeout(() => {
       try {
