@@ -12,7 +12,7 @@ export const Footer = () => {
         
         {/* Brand Info */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="relative h-28 w-28 origin-left">
+          <Link href="/" className="relative h-28 w-28 origin-left block">
             <Image
               src="/logo.png"
               alt="Webersol Logo"
@@ -21,7 +21,7 @@ export const Footer = () => {
               priority
               className="object-contain object-left"
             />
-          </div>
+          </Link>
           <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
             Enterprise Generative AI & Autonomous Software Architecture. Empowering global enterprises with sub-second performance, high-concurrency systems, and AI automation.
           </p>
