@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FloatingAIBot } from "@/components/FloatingAIBot";
+import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { noFlashThemeScript } from "@/lib/theme";
 
 const spaceGrotesk = Space_Grotesk({
@@ -153,6 +154,8 @@ export default function RootLayout({
 
         {/* Persistent Floating AI Bot Assistant */}
         <FloatingAIBot />
+
+        <ScrollToTopButton />
       </body>
     </html>
   );
