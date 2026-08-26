@@ -82,6 +82,17 @@ export const ChatWidget = ({ open, onClose, triggerRef }: ChatWidgetProps) => {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [open, onClose]);
 
+  // The chat widget is mounted on every page, but #estimator/#contact only
+  // exist on the homepage — navigate there first if they're not on this page.
+  const scrollToOrNavigate = (sectionId: string) => {
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+    } else {
+      window.location.href = `/#${sectionId}`;
+    }
+  };
+
   const handleTopicClick = (topicId: string) => {
     const topic: FaqTopic | undefined = FAQ_TOPICS[topicId];
     if (!topic) return;
@@ -97,18 +108,14 @@ export const ChatWidget = ({ open, onClose, triggerRef }: ChatWidgetProps) => {
       setTyping(false);
 
       if (topicId === 'estimator') {
-        setTimeout(() => {
-          document.getElementById('estimator')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
-        }, 400);
+        setTimeout(() => scrollToOrNavigate('estimator'), 400);
       }
     }, 650);
   };
 
   const handleTalkToHuman = () => {
     onClose();
-    setTimeout(() => {
-      document.getElementById('contact')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
-    }, 100);
+    setTimeout(() => scrollToOrNavigate('contact'), 100);
   };
 
   return (
