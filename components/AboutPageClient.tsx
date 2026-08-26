@@ -77,6 +77,33 @@ export const AboutPageClient = () => {
         </div>
       </section>
 
+      {/* MISSION & VISION */}
+      <section className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-14 py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Reveal>
+            <SpotlightCard className="h-full rounded-2xl border border-slate-800 bg-surface/60 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-steel/40 hover:shadow-lg hover:shadow-steel/10">
+              <GlowIcon icon={Rocket} className="mb-5" />
+              <p className="text-xs font-mono uppercase tracking-widest text-steelBright mb-2">Our Mission</p>
+              <h3 className="font-display text-2xl font-bold text-white mb-3">Build systems that outlast the launch.</h3>
+              <p className="text-slate-400 leading-relaxed">
+                To give ambitious teams engineering-grade infrastructure — generative AI, cloud architecture, and financial-grade systems — so they can scale on a foundation built to hold, not just to demo.
+              </p>
+            </SpotlightCard>
+          </Reveal>
+
+          <Reveal delay={0.08}>
+            <SpotlightCard glowColor="#F5920D" className="h-full rounded-2xl border border-slate-800 bg-surface/60 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-steel/40 hover:shadow-lg hover:shadow-steel/10">
+              <GlowIcon icon={Compass} className="mb-5" />
+              <p className="text-xs font-mono uppercase tracking-widest text-steelBright mb-2">Our Vision</p>
+              <h3 className="font-display text-2xl font-bold text-white mb-3">The engineering partner enterprises default to.</h3>
+              <p className="text-slate-400 leading-relaxed">
+                To be recognized globally as the team that turns complex, high-stakes technical challenges into durable, production-grade platforms — trusted for the long run, not just the next release.
+              </p>
+            </SpotlightCard>
+          </Reveal>
+        </div>
+      </section>
+
       {/* VALUES */}
       <section className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-14 py-24">
         <Reveal className="max-w-2xl mb-14">

@@ -76,13 +76,22 @@ export const Footer = () => {
                 <MapPin className="w-4 h-4 text-steel shrink-0 mt-0.5" />
                 <span>Johar Town, Lahore, Pakistan</span>
               </li>
-              <li className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-steelBright shrink-0" />
-                <span>info@webersol.com</span>
+              <li>
+                <a href="mailto:info@webersol.com" className="flex items-center gap-2 hover:text-steelBright transition-colors">
+                  <Mail className="w-4 h-4 text-steelBright shrink-0" />
+                  <span>info@webersol.com</span>
+                </a>
               </li>
-              <li className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-steel shrink-0" />
-                <span>+1 872 284 3026</span>
+              <li>
+                <a
+                  href="https://wa.me/18722843026"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-steelBright transition-colors"
+                >
+                  <Phone className="w-4 h-4 text-steel shrink-0" />
+                  <span>+1 872 284 3026</span>
+                </a>
               </li>
             </ul>
           </div>

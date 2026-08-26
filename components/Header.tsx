@@ -1,13 +1,11 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
 import { Menu, X, Sparkles } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
-
-const STORY_SECTION_IDS = ['hero-section', 'services', 'process'];
 
 const headerVariants = {
   hidden: { y: -20, opacity: 0 },
@@ -35,35 +33,10 @@ const drawerVariants = {
   }
 };
 
-const CHAPTER_LABELS = ['Arrival', 'Capabilities', 'Process'];
-
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 300, damping: 40, restDelta: 0.001 });
-  const [activeChapter, setActiveChapter] = useState<number | null>(null);
-
-  useEffect(() => {
-    const elements = STORY_SECTION_IDS.map((id) => document.getElementById(id)).filter(
-      (el): el is HTMLElement => !!el
-    );
-    if (elements.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = elements.indexOf(entry.target as HTMLElement);
-            if (index !== -1) setActiveChapter(index);
-          }
-        });
-      },
-      { rootMargin: '-40% 0px -40% 0px' }
-    );
-
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <motion.header
@@ -87,16 +60,6 @@ export const Header = () => {
             />
           </div>
         </Link>
-
-        {/* Story chapter indicator — tracks Hero / Services / Process */}
-        {activeChapter !== null && (
-          <div className="hidden lg:flex items-center gap-2 font-mono text-[11px] text-slate-500">
-            <span className="text-steelBright">{String(activeChapter + 1).padStart(2, '0')}</span>
-            <span>/</span>
-            <span>{String(STORY_SECTION_IDS.length).padStart(2, '0')}</span>
-            <span className="ml-1 uppercase tracking-wider">{CHAPTER_LABELS[activeChapter]}</span>
-          </div>
-        )}
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
